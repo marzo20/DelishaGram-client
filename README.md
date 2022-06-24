@@ -20,18 +20,18 @@ Team Members:
 - As a signed in user, I would like to "like/favorite" other use's posts
 
 ## Wire Frames
-! [Landing Page](./Planning/LandingPage.JPG)
-! [Sign Up Page](./Planning/SignUpPage.JPG)
-! [User Profile Page](./Planning/UserProfilePage.JPG)
-! [Account Edit Page](./Planning/AccountEditPage.JPG)
-! [New Post Page](./Planning/NewPostPage.JPG)
-! [Edit Post Page](./Planning/EditPostPage.JPG)
-! [User's Created Dish](./Planning/UsersCreatedDish.JPG)
-! [Dishes Results Page](./Planning/DishesResultsPage.JPG)
-! [One Post Page](./Planning/OnePostPage.JPG)
+![Landing Page](./Planning/LandingPage.JPG)
+![Sign Up Page](./Planning/SignUpPage.JPG)
+![User Profile Page](./Planning/UserProfilePage.JPG)
+![Account Edit Page](./Planning/AccountEditPage.JPG)
+![New Post Page](./Planning/NewPostPage.JPG)
+![Edit Post Page](./Planning/EditPostPage.JPG)
+![User's Created Dish](./Planning/UsersCreatedDish.JPG)
+![Dishes Results Page](./Planning/DishesResultsPage.JPG)
+![One Post Page](./Planning/OnePostPage.JPG)
 
 ## ERD
-! [ERD](./Planning/ERD.png)
+![ERD](./Planning/ERD.png)
 
 ## Planned RESTful Routes
 | VERB | URL pattern | Action \(CRUD\) | Description |

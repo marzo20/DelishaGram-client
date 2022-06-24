@@ -4,3 +4,4 @@ export default function SearchResults(){
             <h1> SearchResults</h1>
         </>
     )
+}

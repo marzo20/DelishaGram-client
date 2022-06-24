@@ -1,4 +1,5 @@
 import Login from "./Login"
+import {Link} from "react-router-dom"
 
 export default function Welcome() {
 	return (
@@ -7,7 +8,7 @@ export default function Welcome() {
 			<Login/>
 		</div>
 		<div>
-			<p>Not Registered? Sign Up Here</p>
+			<p>Not Registered? <Link to="/register">Sign Up Here</Link></p>
 		</div>
 		</>
 	)

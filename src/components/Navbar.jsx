@@ -4,11 +4,11 @@ export default function Navbar({ currentUser, handleLogout }) {
 	 const loggedIn = (
 		<>
 			{/* if the user is logged in... */}
-			<Link to="/">
+			<Link to="/">{' | '}
 				<span onClick={handleLogout}>logout</span>
 			</Link>
 
-			<Link to="/profile">
+			<Link to="/profile">{' | '}
 				profile
 			</Link>
 		</>
@@ -17,11 +17,11 @@ export default function Navbar({ currentUser, handleLogout }) {
 	 const loggedOut = (
 		<>
 			{/* if the user is not logged in... */}
-			<Link to="/register">
+			<Link to="/register">{' | '}
 				register
 			</Link>
 
-			<Link to="/login">
+			<Link to="/login">{' | '}
 				login
 			</Link>
 		</>

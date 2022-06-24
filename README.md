@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# DelishaGram
+### Phone Eats First
+Introduction/Description:
+Have you ever been scrolling through your Instagram and thought, "Why is my feed full of insta-thots? Where's the food?" Well you'll be downright giddy to hear that the fellas over at Team Codeplay have developed the perfect app to satisfy all your foodie needs. Upon login you'll be directed to a home page that shows a random post from a user with a link that navigates to a page that shows your own posts and a link that allows you to make a new post, as well as one to edit a post. Additionally there will be a search function that allows you to search by dish to see all the posts associated with that dish. Finally, we will also provide the ability to make edits to your account information. With all of this said and done, have a blast navigating through this plethora of food porn. And don't forget, Phone Eats First!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Team Members:
+- Jack Wyman
+- Billy Lu
+- Wonjune Jung
 
-## Available Scripts
+## User Stories
+- As a unregistered user, I would like to sign up or log in
+- As a registered user, I would like to sign in with username and password.
+- As a signed in user, I would like to sign out.
+- As a signed in user, I would like to add a post to my wall
+- As a signed in user, I would like to update a post on my wall
+- As a signed in user, I would like to delete a post on my wall
+- As a signed in user, I would like to see all my posts
+- As a signed in user, I would like to view a list of other users and view their walls
+- As a signed in user, I would like to "like/favorite" other use's posts
 
-In the project directory, you can run:
+## Wire Frames
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ERD
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Planned RESTful Routes
+| VERB | URL pattern | Action \(CRUD\) | Description |
+| :--- | :--- | :--- | :--- |
+| POST | /users/login|\(Read\) | Check authentication and authorize |
+| GET | /users/register |\(READ\) | Show Sign Up Page |
+| POST | /users/register |\(Create\) | Create User/authentication and authorization |
+| PUT | /users/edit |\(Update\) | Route to Update profile Info in DB |
+| PUT | /users/changepassword |\(Update\) | Route to Update Password in DB |
+| GET | /users/logout |\(Read\) | logout |
+| GET | /users/profile |\(Read\) | Shows users profile Page |
+| PUT | /users/profile |\(UPDATE\) | Update user's profile |
+| PUT | /users/changepassword |\(UPDATE\) | Change user's password |
+| GET | /post |\(Read\) | Show all of user's posts|
+| POST | /posts |\(Create\) | Create a post about a dish |
+| GET | /posts/:id |\(READ\) | Show details about a dish post|
+| PUT | /post/:id |\(UPDATE\) | Edit selected post|
+| DELETE | /post/:id |\(DELETE\) | Delete the post |
+| GET | /posts/search/:dishname |\(Read\) | show search results |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## MVP Requirements
+- Create Sign-Up, Login pages
+- Create New Post page and Edit Post page for user posts
+- Create page that shows all of user's posts 
+- Create Edit User Info page
+- Allow user to search for dishes and show dishes results page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Stretch Goals
+- Allow user to search by restaurant and by user in addition to being able to search by dish
+- Create page that shows all results for a certain restaurant
+- Create page that shows all results for a certain user
+- Allow user to favorite dishes and create page that shows all the dishes a user has favorited
+- Upload an image
+- Show that image when a dish is rendered
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies to be used
+- Yelp API
+- Cloudinary API (stretch)
+- MongoDB
+- Express
+- React
+- Node
+- Mongoose
+- Axios
+- Cors
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Challenges Anticipated
+- Uploading and rendering pictures
+- 

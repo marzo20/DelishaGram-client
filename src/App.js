@@ -11,6 +11,10 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import NewPost from './components/pages/NewPost'
+import Posts from './components/pages/Posts'
+import PostDetail from './components/pages/PostDetail'
+import SearchResults from './components/pages/SearchResults'
+import ProfileEdit from './components/pages/ProfileEdit'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 
@@ -76,6 +80,23 @@ function App() {
             path="/newpost"
             element={<NewPost />}
           />
+          <Route 
+           path="/posts"
+           element={<Posts />}
+          />
+          <Route 
+           path="/searchresults"
+           element={<SearchResults />}
+          />
+          <Route 
+           path="/posts/:id"
+           element={<PostDetail />}
+          />
+          <Route 
+           path="/profile/edit"
+           element={<ProfileEdit />}
+          />
+
 
         </Routes>
       </div>

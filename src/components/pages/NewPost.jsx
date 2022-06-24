@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 export default function NewPost(){
     // useEffect(() => {
     //     axios.get(`https://api.yelp.com/v3/businesses/search?term=sushi&location="Los Angeles,CA"
-    //     ${process.env.REACT_APP_API_KEY}`)
+    //     ${process.env.REACT_APP_YELP_API_KEY}`)
     //         .then(response => {
     //             console.log(response)
     //         })

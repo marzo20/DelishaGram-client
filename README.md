@@ -36,6 +36,7 @@ Team Members:
 ## Planned RESTful Routes
 | VERB | URL pattern | Action \(CRUD\) | Description |
 | :--- | :--- | :--- | :--- |
+| GET | /users/login|\(Read\) | Show login page |
 | POST | /users/login|\(Read\) | Check authentication and authorize |
 | GET | /users/register |\(READ\) | Show Sign Up Page |
 | POST | /users/register |\(Create\) | Create User/authentication and authorization |

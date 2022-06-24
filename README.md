@@ -73,4 +73,3 @@ Team Members:
 
 ## Challenges Anticipated
 - Uploading and rendering pictures
-- 

@@ -15,7 +15,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 		try {
 			// post fortm data to the backend
 			const reqBody = {
-				email, 
+				email,
 				password
 			}
 			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/login`, reqBody)
@@ -38,7 +38,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 				}
 			}
 		}
- 	}
+	}
 
 	// conditionally render a navigate component
 	if (currentUser) {
@@ -46,29 +46,32 @@ export default function Login({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div>
+		<div className='border border-2'>
 			<h1>Login to Your Account:</h1>
 
 			<p>{msg}</p>
 
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='email'>Email:</label>
-				<input 
-					type="email"
-					id="email"
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
-				/>
-
-				<label htmlFor='password'>Password:</label>
-				<input 
-					type="password"
-					id="password"
-					placeholder='password...'
-					onChange={e => setPassword(e.target.value)}
-					value={password}
-				/>
+			<form onSubmit={handleSubmit} className="flex-col">
+				<div>
+					<label htmlFor='email'>Email:</label>
+					<input
+						type="email"
+						id="email"
+						placeholder='your email...'
+						onChange={e => setEmail(e.target.value)}
+						value={email}
+					/>
+				</div>
+				<div>
+					<label htmlFor='password'>Password:</label>
+					<input
+						type="password"
+						id="password"
+						placeholder='password...'
+						onChange={e => setPassword(e.target.value)}
+						value={password}
+					/>
+				</div>
 
 				<button type="submit">Login</button>
 			</form>

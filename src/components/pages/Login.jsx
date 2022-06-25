@@ -46,7 +46,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div className='border border-2'>
+		<div className='border border-2 w-[30rem] h-[30rem]'>
 			<h1>Login to Your Account:</h1>
 
 			<p>{msg}</p>

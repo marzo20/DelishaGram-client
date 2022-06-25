@@ -5,7 +5,9 @@ import { Navigate } from 'react-router-dom'
 
 export default function Register({ currentUser, setCurrentUser }) {
 	// state for the controlled form
-	const [name, setName] = useState('')
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('')
+	const [userName, setUserName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [msg, setMsg] = useState('')
@@ -16,7 +18,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 		try {
 			// post fortm data to the backend
 			const reqBody = {
-				name,
+				firstName,
+				lastName,
+				userName,
 				email, 
 				password
 			}
@@ -54,13 +58,31 @@ export default function Register({ currentUser, setCurrentUser }) {
 			<p>{msg}</p>
 
 			<form onSubmit={handleSubmit}>
-				<label htmlFor='name'>Name:</label>
+				<label htmlFor='firstName'>First Name:</label>
 				<input 
 					type="text"
-					id="name"
-					placeholder='your username...'
-					onChange={e => setName(e.target.value)}
-					value={name}
+					id="firstName"
+					placeholder='your first name...'
+					onChange={e => setFirstName(e.target.value)}
+					value={firstName}
+				/>
+
+				<label htmlFor='lastName'>Last Name:</label>
+				<input 
+					type="text"
+					id="lastName"
+					placeholder='your last name...'
+					onChange={e => setLastName(e.target.value)}
+					value={lastName}
+				/>
+
+				<label htmlFor='userName'>User Name:</label>
+				<input 
+					type="text"
+					id="userName"
+					placeholder='your user name...'
+					onChange={e => setUserName(e.target.value)}
+					value={userName}
 				/>
 
 				<label htmlFor='email'>Email:</label>

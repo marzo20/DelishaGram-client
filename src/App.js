@@ -17,13 +17,22 @@ import SearchResults from './components/pages/SearchResults'
 import ProfileEdit from './components/pages/ProfileEdit'
 import './App.css'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 
 function App() {
+  const [posts, setPosts] = useState([])
+  const [showForm, setShowForm] = useState(false)
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
-
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
+    // fetch data of posts
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`)
+      .then(response => {
+        console.log(response.data)
+        setPosts(response.data)
+      })
+      .catch(console.warn)
     // check to see if token is in storage
     const token = localStorage.getItem('jwt')
     if (token) {
@@ -33,6 +42,30 @@ function App() {
       setCurrentUser(null)
     }
   }, []) // happen only once
+  const handleSubmit = async (e, form, setForm) => {
+    e.preventDefault()
+    try {
+      const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
+      console.log(response)
+      setPosts([...posts, response.data])
+      setShowForm(false)
+      setForm({
+        restaurant: '',
+        dish: '',
+        rating: '',
+        content: ''
+    })
+    console.log(currentUser)
+    } catch (err) {
+      console.log(err)
+      if (err.response) {
+        if (err.response.status === 400) {
+          // this error is a validation error from our backend
+          console.log(err.response.data.msg)
+        }
+      }
+    }
+  }
 
   // event handler to log the user out when needed
   const handleLogout = () => {
@@ -48,7 +81,7 @@ function App() {
   return (
     <Router>
       <header>
-        <Navbar 
+        <Navbar
           currentUser={currentUser}
           handleLogout={handleLogout}
         />
@@ -56,45 +89,47 @@ function App() {
 
       <div className="App">
         <Routes>
-          <Route 
+          <Route
             path="/"
             element={<Welcome />}
           />
 
-          <Route 
+          <Route
             path="/register"
             element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser} />}
           />
 
-          <Route 
+          <Route
             path="/login"
             element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />}
           />
 
           {/* conditionally render auth locked routes */}
-          <Route 
+          <Route
             path="/profile"
             element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
           />
-          <Route 
+          <Route
             path="/newpost"
-            element={<NewPost />}
+            element={<NewPost
+              handleSubmit={handleSubmit}
+            />}
           />
-          <Route 
-           path="/posts"
-           element={<Posts />}
+          <Route
+            path="/posts"
+            element={<Posts posts={posts} setPosts={setPosts} />}
           />
-          <Route 
-           path="/searchresults"
-           element={<SearchResults />}
+          <Route
+            path="/searchresults"
+            element={<SearchResults />}
           />
-          <Route 
-           path="/posts/:id"
-           element={<PostDetail />}
+          <Route
+            path="/posts/:id"
+            element={<PostDetail />}
           />
-          <Route 
-           path="/profile/edit"
-           element={<ProfileEdit />}
+          <Route
+            path="/profile/edit"
+            element={<ProfileEdit />}
           />
 
 

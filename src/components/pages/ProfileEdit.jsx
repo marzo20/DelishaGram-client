@@ -12,12 +12,12 @@ export default function ProfileEdit() {
     const [newPassword, setNewPassword] = useState("")
     const [verifyNewPassword, setVerifyNewPassword] = useState("")
     
-    const jwtToken = localStorage.getItem("jwt")
-    const decoded = jwt_decode(jwtToken)
+
     
     useEffect(()=>{
         const getUserInfo = async () => {
-
+            const jwtToken = localStorage.getItem("jwt")
+            const decoded = jwt_decode(jwtToken)
             // setEmail(userEmail)
             console.log(decoded.id)
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${decoded.id}`)
@@ -33,6 +33,8 @@ export default function ProfileEdit() {
     const handleEditUserSubmit = async (e) => {
         e.preventDefault()
         console.log("update user info")
+        const jwtToken = localStorage.getItem("jwt")
+        const decoded = jwt_decode(jwtToken)
         const userInfoReqBody = {
             userName,
             firstName,
@@ -100,7 +102,7 @@ export default function ProfileEdit() {
             </form>
             <form onSubmit={handleChangePasswordSubmit}>
                 <div>
-                    <label htmlFor="currentPassword"></label>
+                    <label htmlFor="currentPassword">Current Password: </label>
                     <input
                         id="currentPassword"
                         value={currentPassword}
@@ -108,7 +110,7 @@ export default function ProfileEdit() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="newPassword"></label>
+                    <label htmlFor="newPassword">New Password: </label>
                     <input
                         id="newPassword"
                         value={newPassword}
@@ -116,7 +118,7 @@ export default function ProfileEdit() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="verifyNewPassword"></label>
+                    <label htmlFor="verifyNewPassword">Verify New Password: </label>
                     <input
                         id="verifyNewPassword"
                         value={verifyNewPassword}

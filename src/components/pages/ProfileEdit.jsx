@@ -11,18 +11,26 @@ export default function ProfileEdit() {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [verifyNewPassword, setVerifyNewPassword] = useState("")
+    
+    const jwtToken = localStorage.getItem("jwt")
+    const decoded = jwt_decode(jwtToken)
+    
     useEffect(()=>{
         const getUserInfo = async () => {
-            const jwtToken = localStorage.getItem("jwt")
-            const userEmail = jwt_decode(jwtToken).email
-            setEmail(userEmail)
-            console.log(userEmail)
-            // const userInfo = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/login`,)
+
+            // setEmail(userEmail)
+            console.log(decoded.id)
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${decoded.id}`)
+            console.log("useEff response:",response.data)
+            setUserName(response.data.userName)
+            setFirstName(response.data.firstName)
+            setLastName(response.data.lastName)
+            setEmail(response.data.email)
         }
         getUserInfo()
     },[])
 
-    const handleUserInfoSubmit = (e) => {
+    const handleEditUserSubmit = async (e) => {
         e.preventDefault()
         console.log("update user info")
         const userInfoReqBody = {
@@ -31,7 +39,13 @@ export default function ProfileEdit() {
             lastName,
             email
         }
-        console.log(userInfoReqBody)
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${decoded.id}`,userInfoReqBody)
+        // console.log("put response:",response.data)
+        setUserName(response.data.userName)
+        setFirstName(response.data.firstName)
+        setLastName(response.data.lastName)
+        setEmail(response.data.email)
+        // console.log(userInfoReqBody)
     }
 
     const handleChangePasswordSubmit = (e) => {
@@ -49,7 +63,7 @@ export default function ProfileEdit() {
     return (
         <div>
             <h1>UserName</h1>
-            <form onSubmit={handleUserInfoSubmit}>
+            <form onSubmit={handleEditUserSubmit}>
                 <div>
                     <label htmlFor="username">User Name: </label>
                     <input
@@ -75,7 +89,7 @@ export default function ProfileEdit() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="email"></label>
+                    <label htmlFor="email">Email: </label>
                     <input
                         id="email"
                         value={email}
@@ -109,7 +123,7 @@ export default function ProfileEdit() {
                         onChange={e => { setVerifyNewPassword(e.target.value) }}
                     />
                 </div>
-                <button type="submit">Update Info</button>
+                <button type="submit">Change Password</button>
             </form>
         </div>
     )

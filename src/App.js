@@ -47,7 +47,7 @@ function App() {
     e.preventDefault()
     try {
       console.log("form:",form)
-      const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
       // console.log(response)
       setPosts([...posts, response.data])
       setShowForm(false)

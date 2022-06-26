@@ -52,7 +52,6 @@ function App() {
       setPosts([...posts, response.data])
       setShowForm(false)
       setForm({
-        email:"",
         restaurant: '',
         dish: '',
         rating: '',
@@ -74,7 +73,7 @@ function App() {
   const handleLogout = () => {
     // check to see if a token exists in local storage
     if (localStorage.getItem('jwt')) {
-      // if so, delete it
+      // if so, delete it 
       localStorage.removeItem('jwt')
       // set the user in the App state to be null
       setCurrentUser(null)

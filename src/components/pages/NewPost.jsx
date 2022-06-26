@@ -1,17 +1,16 @@
-import axios from 'axios'
-import { useEffect } from 'react'
+import PostForm from "./PostForm"
 
-export default function NewPost(){
-    // useEffect(() => {
-    //     axios.get(`https://api.yelp.com/v3/businesses/search?term=sushi&location="Los Angeles,CA"
-    //     ${process.env.REACT_APP_YELP_API_KEY}`)
-    //         .then(response => {
-    //             console.log(response)
-    //         })
-    // },[])
+export default function NewPost({ handleSubmit }){
     return(
         <>
             <h1>create newPost</h1>
+            <PostForm initialForm={{
+                restaurant: '',
+                dish: '',
+                rating: '',
+                content: ''
+            }}
+                handleSubmit={handleSubmit} />
         </>
     )
 }

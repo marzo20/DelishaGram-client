@@ -5,10 +5,9 @@ import jwtDecode from 'jwt-decode'
 export default function PostForm({ initialForm, handleSubmit }) {
     const [form, setForm] = useState(initialForm)
     const [pageLoaded, setPageLoaded] = useState(false)
-
+    const token = localStorage.getItem("jwt")
+    const user = jwtDecode(token)
     useEffect(() => {
-        const token = localStorage.getItem("jwt")
-        const user = jwtDecode(token)
         setForm({ ...form, email: user.email })
         console.log("current user", user)
     }, [])
@@ -23,6 +22,7 @@ export default function PostForm({ initialForm, handleSubmit }) {
                     id='restaurant'
                     value={form.restaurant}
                     onChange={e => setForm({ ...form, restaurant: e.target.value })}
+                    required
                 />
                 <label htmlFor="dish">dish: </label>
                 <input
@@ -30,6 +30,7 @@ export default function PostForm({ initialForm, handleSubmit }) {
                     id='dish'
                     value={form.dish}
                     onChange={e => setForm({ ...form, dish: e.target.value })}
+                    required
                 />
                 <label htmlFor="rating">rating: </label>
                 <input
@@ -37,6 +38,7 @@ export default function PostForm({ initialForm, handleSubmit }) {
                     id='rating'
                     value={form.rating}
                     onChange={e => setForm({ ...form, rating: e.target.value })}
+                    required
                 />
                 <label htmlFor="content">content: </label>
                 <input
@@ -44,6 +46,7 @@ export default function PostForm({ initialForm, handleSubmit }) {
                     id="content"
                     value={form.content}
                     onChange={e => setForm({ ...form, content: e.target.value })}
+                    required
                 />
                 <button type="submit">Submit</button>
             </form>

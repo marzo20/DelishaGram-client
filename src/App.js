@@ -93,7 +93,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Welcome />}
+            element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
           />
 
           <Route

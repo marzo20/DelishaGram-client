@@ -42,20 +42,23 @@ function App() {
       setCurrentUser(null)
     }
   }, []) // happen only once
+
   const handleSubmit = async (e, form, setForm) => {
     e.preventDefault()
     try {
+      console.log("form:",form)
       const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
-      console.log(response)
+      // console.log(response)
       setPosts([...posts, response.data])
       setShowForm(false)
       setForm({
+        email:"",
         restaurant: '',
         dish: '',
         rating: '',
         content: ''
     })
-    console.log(currentUser)
+    // console.log(currentUser)
     } catch (err) {
       console.log(err)
       if (err.response) {

@@ -5,6 +5,7 @@ export default function NewPost({ handleSubmit }){
         <>
             <h1>create newPost</h1>
             <PostForm initialForm={{
+                email:"",
                 restaurant: '',
                 dish: '',
                 rating: '',

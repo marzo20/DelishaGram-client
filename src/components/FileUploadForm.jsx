@@ -1,10 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function FileUploadForm() {
   const[formImg, setFormImg] = useState('')
   const [msg, setMsg] = useState('')
-  const [displayImg, setDisplayImg] = useState('')
+  const [displayImg, setDisplayImg] = useState({
+    post: {
+        id: ''
+    }
+  })
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
+            console.log('Consolelogging:', response.data)
+        } catch (err) {
+            console.warn(err)
+        }
+    }
+  }, [])
   
   const handleSubmit = async e => {
     e.preventDefault()

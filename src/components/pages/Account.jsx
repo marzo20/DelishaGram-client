@@ -11,6 +11,8 @@ export default function ProfileEdit() {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [verifyNewPassword, setVerifyNewPassword] = useState("")
+
+    const [msg, setMsg] = useState("")
     
 
     
@@ -50,15 +52,27 @@ export default function ProfileEdit() {
         // console.log(userInfoReqBody)
     }
 
-    const handleChangePasswordSubmit = (e) => {
+    const handleChangePasswordSubmit = async (e) => {
         e.preventDefault()
-        console.log("change password")
-        const passwordReqBody = {
+        const jwtToken = localStorage.getItem("jwt")
+        const decoded = jwt_decode(jwtToken)
+        const userId = decoded.id
+        console.log(userId)
+
+        if (newPassword !== verifyNewPassword){
+            setMsg("Password Validation Failed, new password and verify new password must be the same")
+            console.log(msg)
+            return
+        }
+
+        // console.log("change password")
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/changepassword`,{
             currentPassword,
             newPassword,
-            verifyNewPassword
-        }
-        console.log(passwordReqBody)
+            userId 
+        })
+        // console.log(passwordReqBody)
+        console.log(response)
 
     }
 
@@ -105,6 +119,7 @@ export default function ProfileEdit() {
                     <label htmlFor="currentPassword">Current Password: </label>
                     <input
                         id="currentPassword"
+                        type="password"
                         value={currentPassword}
                         onChange={e => { setCurrentPassword(e.target.value) }}
                     />
@@ -113,6 +128,7 @@ export default function ProfileEdit() {
                     <label htmlFor="newPassword">New Password: </label>
                     <input
                         id="newPassword"
+                        type="password"
                         value={newPassword}
                         onChange={e => { setNewPassword(e.target.value) }}
                     />
@@ -121,6 +137,7 @@ export default function ProfileEdit() {
                     <label htmlFor="verifyNewPassword">Verify New Password: </label>
                     <input
                         id="verifyNewPassword"
+                        type="password"
                         value={verifyNewPassword}
                         onChange={e => { setVerifyNewPassword(e.target.value) }}
                     />

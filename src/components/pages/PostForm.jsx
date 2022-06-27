@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import FileUploadForm from '../FileUploadForm'
 import jwtDecode from 'jwt-decode'
 
 export default function PostForm({ initialForm, handleSubmit }) {
@@ -50,6 +51,7 @@ export default function PostForm({ initialForm, handleSubmit }) {
                 />
                 <button type="submit">Submit</button>
             </form>
+            <FileUploadForm />
         </>
     )
 }

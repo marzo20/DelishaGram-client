@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom'
-// import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 // import axios from 'axios'
 
-export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, searchDish, setSearchDish }) {
-	// const navigate = useNavigate();
+export default function Navbar({ currentUser, handleLogout , handleSearchSubmit, searchDish, setSearchDish}) {
+	// const [searchDish, setSearchDish] = useState("")
+		// const navigate = useNavigate();
 
-	
-
-	
-	
+	// const handleSearchSubmit = (e) => {
+	// 	e.preventDefault()
+	// 	navigate("/searchresults", {state: {
+	// 		searchDish
+	// 	}})
+	// }
+		
 	const loggedIn = (
 		<>
 			{/* if the user is logged in... */}
@@ -19,6 +23,7 @@ export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, 
 			<Link to="/login">
 				<span onClick={handleLogout}>logout</span>
 			</Link>
+			
 			<form onSubmit={handleSearchSubmit}>
 				<label htmlFor="search" >Search for a Dish:</label>
                 <input 
@@ -28,9 +33,9 @@ export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, 
 					value={searchDish}
 					onChange={e => { setSearchDish(e.target.value)}}
 				/>
-				{/* <Link to='/searchresults'>
-				</Link> */}
-					<button type="submit">Search</button>
+				<Link to='/searchresults'>
+				<button type="submit">Search</button>
+				</Link>
 			</form>
 		</>
 	)

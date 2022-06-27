@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import axios from 'axios'
+// import { useState } from 'react'
+// import axios from 'axios'
 
 export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, searchDish, setSearchDish }) {
 	// const navigate = useNavigate();
@@ -28,9 +28,9 @@ export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, 
 					value={searchDish}
 					onChange={e => { setSearchDish(e.target.value)}}
 				/>
-				<Link to='/searchresults'>
+				{/* <Link to='/searchresults'>
+				</Link> */}
 					<button type="submit">Search</button>
-				</Link>
 			</form>
 		</>
 	)

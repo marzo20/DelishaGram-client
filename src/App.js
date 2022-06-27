@@ -15,7 +15,7 @@ import NewPost from './components/pages/NewPost'
 import Posts from './components/pages/Posts'
 import PostDetail from './components/pages/PostDetail'
 import SearchResults from './components/pages/SearchResults'
-import ProfileEdit from './components/pages/ProfileEdit'
+import Account from './components/pages/Account'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
@@ -150,8 +150,8 @@ function App() {
             element={<PostDetail />}
           />
           <Route
-            path="/profile/edit"
-            element={<ProfileEdit />}
+            path="/account"
+            element={<Account />}
           />
 
 

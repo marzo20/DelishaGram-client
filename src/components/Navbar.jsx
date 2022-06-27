@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import axios from 'axios'
 
-export default function Navbar({ currentUser, handleLogout }) {
+export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, searchDish, setSearchDish }) {
+	// const navigate = useNavigate();
+
+	
+
+	
+	
 	const loggedIn = (
 		<>
 			{/* if the user is logged in... */}
@@ -11,6 +19,19 @@ export default function Navbar({ currentUser, handleLogout }) {
 			<Link to="/login">
 				<span onClick={handleLogout}>logout</span>
 			</Link>
+			<form onSubmit={handleSearchSubmit}>
+				<label htmlFor="search" >Search for a Dish:</label>
+                <input 
+					id="search" 
+					type="text" 
+					placeholder="enter query here" 
+					value={searchDish}
+					onChange={e => { setSearchDish(e.target.value)}}
+				/>
+				<Link to='/searchresults'>
+					<button type="submit">Search</button>
+				</Link>
+			</form>
 		</>
 	)
 

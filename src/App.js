@@ -23,8 +23,8 @@ import axios from 'axios'
 function App() {
   const [posts, setPosts] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [searchResult, setSearchResult] = useState([])
   const [searchDish, setSearchDish] = useState('')
+  const [searchResult, setSearchResult] = useState([])
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
   // const navigate = useNavigate()

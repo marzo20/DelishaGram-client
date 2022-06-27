@@ -34,6 +34,15 @@ export default function PostDetail({ currentUser }){
         }
         fetchData()
     },[])
+    const handleSubmit = async (e, form, setForm) => {
+        e.preventDefault()
+        try{
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`,form)
+            console.log(response.data)
+        }catch(err){
+            console.log('put method failed :(', err)
+        }
+    }
     const renderDetail = (
         <div>
             <h1>PostDetail</h1>
@@ -48,9 +57,16 @@ export default function PostDetail({ currentUser }){
     )
     return(
         <>
-            {showForm ? 'Let us edit' : renderDetail}
-            
-          
+            {showForm ? 
+            <PostForm 
+            initialForm={{
+                restaurant: post.dish.restaurant.name,
+                dish: post.dish.dishName,
+                rating: post.rating,
+                content: post.content
+            }}
+            handleSubmit={handleSubmit}
+            /> : renderDetail}
         </>
     )
 }

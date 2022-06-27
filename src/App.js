@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useNavigate,
   Navigate
   // useNavigate
 } from 'react-router-dom'
@@ -47,18 +48,20 @@ function App() {
     }
   }, []) // happen only once
   
-  const handleSearchSubmit = async (e) => {
-		e.preventDefault()
-		try {
-			const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/dishes/search/${searchDish}`)
-			console.log(response.data)
-      setSearchResult(response.data)
-		} catch (err) {
-			console.warn(err)
-		}
-    // navigate('/searchresults', {replace: true})
+  // const handleSearchSubmit = async (e) => {
+	// 	e.preventDefault()
+	// 	try {
+	// 		const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/dishes/search/${searchDish}`)
+	// 		console.log(response.data)
+  //     setSearchResult(response.data)
+      
+	// 	} catch (err) {
+  //     console.warn(err)
+	// 	}
+  //   // navigate('/searchresults')
+  //   navigate('/searchresults', {replace: true})
 
-	}
+	// }
 
   const handleSubmit = async (e, form, setForm) => {
     e.preventDefault()
@@ -103,9 +106,9 @@ function App() {
         <Navbar
           currentUser={currentUser}
           handleLogout={handleLogout}
-          handleSearchSubmit={handleSearchSubmit}
-          searchDish={searchDish}
-          setSearchDish={setSearchDish}
+          // handleSearchSubmit={handleSearchSubmit}
+          // searchDish={searchDish}
+          // setSearchDish={setSearchDish}
         />
       </header>
 
@@ -143,7 +146,10 @@ function App() {
           />
           <Route
             path="/searchresults"
-            element={<SearchResults searchResult={searchResult} />}
+            element={<SearchResults 
+              searchResult={searchResult}
+              searchDish={searchDish}
+             />}
           />
           <Route
             path="/posts/:id"

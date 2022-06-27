@@ -1,23 +1,36 @@
-// import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import PostPreview from "../PostPreview"
 import axios from "axios"
 
-export default function SearchResults({searchResult}){
+export default function SearchResults({
+    // searchDish, 
+    // searchResult
+}){
     
-    const [dishResults, setDishResults] = useState([])
-    // const location = useLocation()
-    // console.log("location: ",location)
+    const [dishResults, setDishResults] = useState({
+        posts:[{
+            restaurants:{}
+        }]
+    })
+    const location = useLocation()
+    const [loaded, setLoaded] = useState(false)
+    console.log("location: ",location)
     useEffect( ()=>{
         const fetchDishes = async () => {
-            const dishResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/dishes/search/McChicken`)
-            // console.log("Dish Search Response: ",dishResponse.data)
-            const dishme = dishResponse.data
-            setDishResults(dishme)
-            console.log("dishResults: ",dishResults)
+            try {
+                const dishResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/dishes/search/${location.state.searchDish}`)
+                // console.log("Dish Search Response: ",dishResponse.data)
+                // const dishme = dishResponse.data
+                // console.log("dishme",dishme)
+                setDishResults(dishResponse.data)
+                console.log("dishResults: ",dishResults)
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchDishes()
-    },[])
+    },[location])
 
     
     // const resultPosts = searchResult.map((result, i) => {
@@ -28,10 +41,19 @@ export default function SearchResults({searchResult}){
     //         </div>
     //     )
     // })
+
+    const renderResults = dishResults.posts.map((result)=>{
+        return(
+            <div>
+                <p>{result.dish.dishName}</p>
+                <p>{result.dish.restaurant.name}</p>
+            </div>
+        )
+    })
     return(
         <>
-            {/* {resultPosts} */}
             <h1>Search Results:</h1>
+            {renderResults}
         </>
     )
 }

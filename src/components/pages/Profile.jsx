@@ -4,11 +4,14 @@ import axios from 'axios'
 export default function Profile({ currentUser, handleLogout }) {
 	// state for the secret message (aka user privilaged data)
 	const [msg, setMsg] = useState('')
-
+	const [userPosts, setUserPosts] = useState([])
 	// useEffect for getting the user data and checking auth
 	useEffect(() => {
 	const fetchData = async () => {
 			try {
+				const userResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${currentUser.id}`)
+				console.log('this is user data',userResponse.data)
+				setUserPosts(userResponse.data.posts)
 				// get the token from local storage
 				const token = localStorage.getItem('jwt')
 				// make the auth headers
@@ -35,16 +38,30 @@ export default function Profile({ currentUser, handleLogout }) {
 			}
 		}
 		fetchData()
+	},[])
+	const userPost = userPosts.map((post, i) => {
+		
+		return(
+			<>
+				<div key={`post-${i}`}>
+					<h2>Restaurant: {post.dish.restaurant.name}</h2>
+					<h2>Dish : {post.dish.dishName}</h2>
+					<h2>Rate : {post.rating}</h2>
+				</div>
+			</>
+		)
 	})
 	return (
 		<div>
-			<h1>Hello, {currentUser.name}</h1>
-
-			<p>your email is {currentUser.email}</p>
-
-			<h2>Here is the secret message that is only availible to users of User App:</h2>
-
-			<h3>{msg}</h3>
+			<h1>Welcome, {currentUser.userName}</h1>
+			<h2>User Posts:</h2>
+			{msg}
+			{/* {userPost} */}
+			<h2>
+				{userPosts.length>0 ? userPost : 'NO POST'}
+			</h2>
+			
+			
 		</div>
 	)
 }

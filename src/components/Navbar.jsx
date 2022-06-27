@@ -15,7 +15,7 @@ export default function Navbar({ currentUser, handleLogout, handleSearchSubmit, 
 			<Link to='/posts'>Posts</Link>{' | '}
 			<Link to='/profile'>Profile</Link>{' | '}
 			<Link to='/newpost'>+</Link>{' | '}
-			<Link to='/profile/edit'>Edit</Link>{' | '}
+			<Link to='/account'>Edit</Link>{' | '}
 			<Link to="/login">
 				<span onClick={handleLogout}>logout</span>
 			</Link>

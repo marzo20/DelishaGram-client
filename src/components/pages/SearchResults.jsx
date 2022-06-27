@@ -10,7 +10,10 @@ export default function SearchResults({
     
     const [dishResults, setDishResults] = useState({
         posts:[{
-            restaurants:{}
+            dish: {
+                restaurant:{}
+            },
+            poster:{}
         }]
     })
     const location = useLocation()
@@ -47,6 +50,7 @@ export default function SearchResults({
             <div>
                 <p>{result.dish.dishName}</p>
                 <p>{result.dish.restaurant.name}</p>
+                <p>{result.poster.userName}</p>
             </div>
         )
     })

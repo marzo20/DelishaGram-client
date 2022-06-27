@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate
+  // useNavigate
 } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Login from './components/pages/Login'
@@ -22,8 +23,11 @@ import axios from 'axios'
 function App() {
   const [posts, setPosts] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const [searchResult, setSearchResult] = useState([])
+  const [searchDish, setSearchDish] = useState('')
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
+  // const navigate = useNavigate()
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
     // fetch data of posts
@@ -42,6 +46,19 @@ function App() {
       setCurrentUser(null)
     }
   }, []) // happen only once
+  
+  const handleSearchSubmit = async (e) => {
+		e.preventDefault()
+		try {
+			const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/dishes/search/${searchDish}`)
+			console.log(response.data)
+      setSearchResult(response.data)
+		} catch (err) {
+			console.warn(err)
+		}
+    // navigate('/searchresults', {replace: true})
+
+	}
 
   const handleSubmit = async (e, form, setForm) => {
     e.preventDefault()
@@ -86,6 +103,9 @@ function App() {
         <Navbar
           currentUser={currentUser}
           handleLogout={handleLogout}
+          handleSearchSubmit={handleSearchSubmit}
+          searchDish={searchDish}
+          setSearchDish={setSearchDish}
         />
       </header>
 
@@ -123,7 +143,7 @@ function App() {
           />
           <Route
             path="/searchresults"
-            element={<SearchResults />}
+            element={<SearchResults searchResult={searchResult} />}
           />
           <Route
             path="/posts/:id"

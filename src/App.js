@@ -153,7 +153,9 @@ function App() {
           />
           <Route
             path="/posts/:id"
-            element={<PostDetail />}
+            element={<PostDetail 
+            currentUser={currentUser}
+            />}
           />
           <Route
             path="/account"

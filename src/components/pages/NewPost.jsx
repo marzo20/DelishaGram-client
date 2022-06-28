@@ -1,6 +1,6 @@
 import PostForm from "./PostForm"
 
-export default function NewPost({ handleSubmit }){
+export default function NewPost({ handleSubmit, imgUrl, setImgUrl }){
     return(
         <>
             <h1>create newPost</h1>
@@ -9,9 +9,13 @@ export default function NewPost({ handleSubmit }){
                 restaurant: '',
                 dish: '',
                 rating: '',
-                content: ''
+                content: '',
+                img: ''
             }}
-                handleSubmit={handleSubmit} />
+                handleSubmit={handleSubmit}
+                imgUrl={imgUrl}
+                setImgUrl={setImgUrl}    
+            />
         </>
     )
 }

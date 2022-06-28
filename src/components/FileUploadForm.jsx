@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-export default function FileUploadForm() {
+export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
     const { id } = useParams()
 
     const [formImg, setFormImg] = useState('')
@@ -25,7 +25,7 @@ export default function FileUploadForm() {
         fetchData()
     }, [])
 
-    const handleSubmit = async e => {
+    const handleImageSubmit = async e => {
         e.preventDefault()
         try {
             // multipart form data object
@@ -36,6 +36,7 @@ export default function FileUploadForm() {
             const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/images`, fd)
             console.log(response.data)
             setDisplayImg(response.data.cloudImage)
+            setForm({ ...form, img: response.data.cloudImage })
 
         } catch (err) {
             console.warn(err)
@@ -56,7 +57,7 @@ export default function FileUploadForm() {
             }
 
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleImageSubmit}
                 encType='multipart/form'
             >
                 <label htmlFor='image'>Upload an Image</label>

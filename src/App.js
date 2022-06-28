@@ -26,6 +26,7 @@ function App() {
   const [showForm, setShowForm] = useState(false)
   const [searchDish, setSearchDish] = useState('')
   const [searchResult, setSearchResult] = useState([])
+  const [imgUrl, setImgUrl] = useState('')
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
   // const navigate = useNavigate()
@@ -137,6 +138,8 @@ function App() {
           <Route
             path="/newpost"
             element={<NewPost
+              imgUrl={imgUrl}
+              setImgUrl={setImgUrl}
               handleSubmit={handleSubmit}
             />}
           />

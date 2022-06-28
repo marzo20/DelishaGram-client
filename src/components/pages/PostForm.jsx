@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import FileUploadForm from '../FileUploadForm'
 import jwtDecode from 'jwt-decode'
 
-export default function PostForm({ initialForm, handleSubmit }) {
+export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl }) {
     const [form, setForm] = useState(initialForm)
     const [pageLoaded, setPageLoaded] = useState(false)
     const token = localStorage.getItem("jwt")
@@ -49,9 +49,24 @@ export default function PostForm({ initialForm, handleSubmit }) {
                     onChange={e => setForm({ ...form, content: e.target.value })}
                     required
                 />
+                {/* <label htmlFor="imgUrl">imgUrl: </label>
+                <input 
+                    type='text'
+                    id="imgUrl"
+                    value={imgUrl}
+                    onChange={() => setForm({ ...form, imgUrl: {imgUrl} })}
+                    required
+                /> */}
+
+                
                 <button type="submit">Submit</button>
             </form>
-            <FileUploadForm />
+            <FileUploadForm 
+                imgUrl={imgUrl}
+                setImgUrl={setImgUrl}
+                setForm={setForm}
+                form={form}
+            />
         </>
     )
 }

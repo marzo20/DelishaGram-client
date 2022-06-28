@@ -19,6 +19,9 @@ export default function PostDetail({ currentUser }) {
             userName: '',
             _id: '',
         },
+        image: {
+            cloud_id: ''
+        }
     })
     useEffect(() => {
         const fetchData = async () => {

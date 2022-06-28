@@ -47,11 +47,9 @@ export default function Profile({ currentUser, handleLogout }) {
 				<Link to={`/posts/${post._id}`}>
 					<div
 						key={`post-${i}`}
-						className={`flex flex-col`}
+						className={`flex flex-col border m-3 p-6'`}
 					>
-						<h2>Restaurant: {post.dish.restaurant.name}</h2>
-						<h2>Dish : {post.dish.dishName}</h2>
-						<h2>Rate : {post.rating}</h2>
+						<img src={post.image.cloud_id} alt={post.dish.dishName}/>
 					</div>
 				</Link>
 			</>

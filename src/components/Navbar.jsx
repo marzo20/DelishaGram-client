@@ -11,13 +11,12 @@ export default function Navbar({ currentUser,
 	const [searchDish, setSearchDish] = useState("")
 	const navigate = useNavigate();
 
-	const handleSearchSubmit = (e) => {
+	const handleSearchSubmit = async (e) => {
 		e.preventDefault()
-		navigate("/searchresults", {
+		await navigate("/searchresults", {
 			state: {
 				searchDish
-			},
-			replace: true
+			}
 		})
 	}
 

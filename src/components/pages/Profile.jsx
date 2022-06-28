@@ -9,10 +9,10 @@ export default function Profile({ currentUser, handleLogout }) {
 	const [userPosts, setUserPosts] = useState([])
 	// useEffect for getting the user data and checking auth
 	useEffect(() => {
-	const fetchData = async () => {
+		const fetchData = async () => {
 			try {
 				const userResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${currentUser.id}`)
-				console.log('this is user data',userResponse.data)
+				console.log('this is user data', userResponse.data)
 				setUserPosts(userResponse.data.posts)
 				// get the token from local storage
 				const token = localStorage.getItem('jwt')
@@ -40,18 +40,20 @@ export default function Profile({ currentUser, handleLogout }) {
 			}
 		}
 		fetchData()
-	},[])
+	}, [])
 	const userPost = userPosts.map((post, i) => {
-		
-		return(
+
+		return (
 			<>
-				<div 
-				key={`post-${i}`}
-				className={`flex flex-col`}
+				<div
+					key={`post-${i}`}
+					className={`flex flex-col`}
 				>
-					<h2>Restaurant: {post.dish.restaurant.name}</h2>
-					<h2>Dish : {post.dish.dishName}</h2>
-					<h2>Rate : {post.rating}</h2>
+					<Link to={`/posts/${post._id}`}>
+						<h2>Restaurant: {post.dish.restaurant.name}</h2>
+						<h2>Dish : {post.dish.dishName}</h2>
+						<h2>Rate : {post.rating}</h2>
+					</Link>
 				</div>
 			</>
 		)
@@ -59,20 +61,20 @@ export default function Profile({ currentUser, handleLogout }) {
 	return (
 		<div>
 			<h1
-			className='text-lg font-bold border m-3 p-6'
+				className='text-lg font-bold border m-3 p-6'
 			>Welcome, {currentUser.userName}</h1>
 			<h2>User Posts:</h2>
 			{msg}
 			{/* {userPost} */}
 			<h2>
 				<div
-				className='grid grid-cols-3 grid-rows-auto mx-[15rem]'
+					className='grid grid-cols-3 grid-rows-auto mx-[15rem]'
 				>
-				{userPosts.length>0 ? userPost : 'NO POST'}
+					{userPosts.length > 0 ? userPost : 'NO POST'}
 				</div>
 			</h2>
-			
-			
+
+
 		</div>
 	)
 }

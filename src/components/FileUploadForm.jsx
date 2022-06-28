@@ -13,17 +13,17 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
         // }
     })
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
-                console.log('Consolelogging:', response.data)
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
+    //             console.log('Consolelogging:', response.data)
+    //         } catch (err) {
+    //             console.warn(err)
+    //         }
+    //     }
+    //     fetchData()
+    // }, [])
 
     const handleImageSubmit = async e => {
         e.preventDefault()

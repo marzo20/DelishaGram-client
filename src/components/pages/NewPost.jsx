@@ -1,14 +1,20 @@
 import PostForm from "./PostForm"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useState } from "react"
 
 export default function NewPost({ imgUrl, setImgUrl }){
-    let navigate = useNavigate()
+    
+  let navigate = useNavigate()
+
+    
     const handleSubmit = async (e, form, setForm) => {
-        e.preventDefault()
+       
         try {
+          e.preventDefault()
           console.log("form:",form)
           const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
+          console.log(response)
           // console.log(response)
           // setPosts([...posts, response.data])
           
@@ -19,6 +25,9 @@ export default function NewPost({ imgUrl, setImgUrl }){
             content: '',
             img: ''
         })
+        // setIsLoaded(true)
+
+          navigate('/posts')
         
         // console.log(currentUser)
         } catch (err) {
@@ -30,9 +39,11 @@ export default function NewPost({ imgUrl, setImgUrl }){
             }
           }
         }
-        navigate('/posts')
+        
       }
-    
+
+      
+
     return(
         <>
             <h1>create newPost</h1>

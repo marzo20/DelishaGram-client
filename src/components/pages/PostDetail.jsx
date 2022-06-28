@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostForm from './PostForm'
 
 
 export default function PostDetail({ currentUser }){
+    const navigate = useNavigate()
     const {id} = useParams()
     const [showForm, setShowForm] = useState(false)
     const [post, setPost] = useState({
@@ -39,6 +40,8 @@ export default function PostDetail({ currentUser }){
         try{
             const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`,form)
             console.log(response.data)
+            setPost(response.data)
+            setShowForm(false)
         }catch(err){
             console.log('put method failed :(', err)
         }
@@ -46,7 +49,7 @@ export default function PostDetail({ currentUser }){
     const renderDetail = (
         <div>
             <h1>PostDetail</h1>
-            <h3>Posted by: {post.poster.userName ? post.poster.userName : 'anonymous'}</h3>
+            <h3>Posted by: {post.poster.userName}</h3>
             <h2>Dish: {post.dish.dishName}</h2>
             <h2>Restaurant: {post.dish.restaurant.name}</h2>
             <h2>Rate: {post.rating}</h2>

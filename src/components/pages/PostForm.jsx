@@ -49,16 +49,6 @@ export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl 
                     onChange={e => setForm({ ...form, content: e.target.value })}
                     required
                 />
-                {/* <label htmlFor="imgUrl">imgUrl: </label>
-                <input 
-                    type='text'
-                    id="imgUrl"
-                    value={imgUrl}
-                    onChange={() => setForm({ ...form, imgUrl: {imgUrl} })}
-                    required
-                /> */}
-
-                
                 <button type="submit">Submit</button>
             </form>
             <FileUploadForm 

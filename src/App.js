@@ -56,34 +56,7 @@ function App() {
 
 	// }
 
-  const handleSubmit = async (e, form, setForm) => {
-    e.preventDefault()
-    try {
-      console.log("form:",form)
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
-      // console.log(response)
-      // setPosts([...posts, response.data])
-      setShowForm(false)
-      setForm({
-        restaurant: '',
-        dish: '',
-        rating: '',
-        content: '',
-        img: ''
-    })
-    // await navigate('/posts')
-    // console.log(currentUser)
-    } catch (err) {
-      console.log(err)
-      if (err.response) {
-        if (err.response.status === 400) {
-          // this error is a validation error from our backend
-          console.log(err.response.data.msg)
-        }
-      }
-    }
-  }
-
+  
   // event handler to log the user out when needed
   const handleLogout = () => {
     // check to see if a token exists in local storage
@@ -134,7 +107,6 @@ function App() {
             element={<NewPost
               imgUrl={imgUrl}
               setImgUrl={setImgUrl}
-              handleSubmit={handleSubmit}
             />}
           />
           <Route

@@ -23,6 +23,7 @@ export default function PostDetail({ currentUser }) {
             cloud_id: ''
         }
     })
+    const [form, setForm] = useState({})
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -78,12 +79,13 @@ export default function PostDetail({ currentUser }) {
         <>
             {showForm ?
                 <PostForm
-                    initialForm={{
+                    form={{
                         restaurant: post.dish.restaurant.name,
                         dish: post.dish.dishName,
                         rating: post.rating,
                         content: post.content
                     }}
+                    setForm={setForm}
                     handleSubmit={handleSubmit}
                 /> : renderDetail}
 

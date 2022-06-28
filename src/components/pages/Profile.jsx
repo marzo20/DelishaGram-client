@@ -42,19 +42,18 @@ export default function Profile({ currentUser, handleLogout }) {
 		fetchData()
 	}, [])
 	const userPost = userPosts.map((post, i) => {
-
 		return (
 			<>
-				<div
-					key={`post-${i}`}
-					className={`flex flex-col`}
-				>
-					<Link to={`/posts/${post._id}`}>
+				<Link to={`/posts/${post._id}`}>
+					<div
+						key={`post-${i}`}
+						className={`flex flex-col`}
+					>
 						<h2>Restaurant: {post.dish.restaurant.name}</h2>
 						<h2>Dish : {post.dish.dishName}</h2>
 						<h2>Rate : {post.rating}</h2>
-					</Link>
-				</div>
+					</div>
+				</Link>
 			</>
 		)
 	})

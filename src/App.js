@@ -2,9 +2,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
-  Navigate
-  // useNavigate
+  Navigate,
+  useNavigate
 } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Login from './components/pages/Login'
@@ -22,7 +21,7 @@ import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 
 function App() {
-  const [posts, setPosts] = useState([])
+  // let navigate = useNavigate()
   const [showForm, setShowForm] = useState(false)
   const [searchDish, setSearchDish] = useState('')
   const [searchResult, setSearchResult] = useState([])
@@ -32,13 +31,6 @@ function App() {
   // const navigate = useNavigate()
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
-    // fetch data of posts
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`)
-      .then(response => {
-        console.log(response.data)
-        setPosts(response.data)
-      })
-      .catch(console.warn)
     // check to see if token is in storage
     const token = localStorage.getItem('jwt')
     if (token) {
@@ -70,14 +62,16 @@ function App() {
       console.log("form:",form)
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
       // console.log(response)
-      setPosts([...posts, response.data])
+      // setPosts([...posts, response.data])
       setShowForm(false)
       setForm({
         restaurant: '',
         dish: '',
         rating: '',
-        content: ''
+        content: '',
+        img: ''
     })
+    // await navigate('/posts')
     // console.log(currentUser)
     } catch (err) {
       console.log(err)
@@ -145,7 +139,7 @@ function App() {
           />
           <Route
             path="/posts"
-            element={<Posts posts={posts} setPosts={setPosts} />}
+            element={<Posts />}
           />
           <Route
             path="/searchresults"

@@ -19,7 +19,7 @@ export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl,
             <h1>PostForm</h1>
             <form onSubmit={e => {
                 handleSubmit(e, form, setForm)
-                navigate(rerouteUrl)
+                // navigate(rerouteUrl)
             }              
             }>
                 <label htmlFor="restaurant">restaurant: </label>

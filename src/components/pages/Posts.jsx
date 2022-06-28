@@ -14,15 +14,12 @@ export default function Posts() {
         }]
     )
     useEffect(() => {
-        const fetchData = async() => {
-            try {
-                const response = await  axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`)
+            .then(response => {
+                console.log(response)
                 setPosts(response.data)
-            }catch(err){
-                console.log(err)
-            }
-        }
-        fetchData()
+            })
+            .catch(console.warn)
     },[])
     const msg = "No posts. Please Create new Post"
 

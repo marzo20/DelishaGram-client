@@ -1,6 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 // import axios from 'axios'
+import feedIcon from "./svg/feed-svgrepo-com.svg"
+import heartIcon from "./svg/heart-svgrepo-com.svg"
+import magGlassIcon from "./svg/magnifying-glass-svgrepo-com.svg"
+import profileIcon from "./svg/profile-svgrepo-com.svg"
+import settingIcon from "./svg/setting-svgrepo-com.svg"
+import plusIcon from "./svg/plus-svgrepo-com.svg"
+import logoutIcon from "./svg/logout-svgrepo-com.svg"
 
 export default function Navbar({ currentUser,
 	handleLogout,
@@ -13,7 +20,7 @@ export default function Navbar({ currentUser,
 
 	const handleSearchSubmit = async (e) => {
 		e.preventDefault()
-		await navigate("/searchresults", {
+		navigate("/searchresults", {
 			state: {
 				searchDish
 			}
@@ -22,26 +29,107 @@ export default function Navbar({ currentUser,
 
 	const loggedIn = (
 		<>
-			{/* if the user is logged in... */}
-			<Link to='/posts'>Posts</Link>{' | '}
-			<Link to='/profile'>Profile</Link>{' | '}
-			<Link to='/newpost'>+</Link>{' | '}
-			<Link to='/account'>Edit</Link>{' | '}
-			<Link to="/login">
-				<span onClick={handleLogout}>logout</span>
-			</Link>
+			<div
+				className='flex'
+			>
 
-			<form onSubmit={handleSearchSubmit}>
-				<label htmlFor="search" >Search for a Dish:</label>
-				<input
-					id="search"
-					type="text"
-					placeholder="enter query here"
-					value={searchDish}
-					onChange={e => { setSearchDish(e.target.value) }}
-				/>
-				<button type="submit">Search</button>
-			</form>
+				{/* Search Bar */}
+				<form 
+				onSubmit={handleSearchSubmit}
+				className="flex"
+				>
+					<label htmlFor="search"></label>
+					<input
+						id="search"
+						type="text"
+						placeholder="Search Dishes!"
+						value={searchDish}
+						onChange={e => { setSearchDish(e.target.value) }}
+						className="border rounded-sm h-[2rem] w-[15rem] place-self-center text-xl text-center"
+					/>
+					<button 
+					type="submit"
+					className='place self center ml-[.2rem]'
+					>
+						<img
+							src={magGlassIcon}
+							alt='feed Icon'
+							className='h-[1.2rem] flex item-center'
+						/>
+					</button>
+				</form>
+
+			</div>
+			{/* divider */}
+			<div
+			className='flex'
+			>
+				{/* feed Nav Icon */}
+				<div
+					className='flex mx-[0.5rem]'
+				>
+					<img
+						onClick={() => navigate('/posts')}
+						src={feedIcon}
+						alt='feed Icon'
+						className='h-[2rem] place-self-center'
+					/>
+				</div>
+
+				{/* profile Nav Icon */}
+				<div
+					className='flex mx-[0.5rem]'
+				>
+
+					<img
+						onClick={() => navigate('/profile')}
+						src={profileIcon}
+						alt='feed Icon'
+						className='h-[2.5rem] place-self-center'
+					/>
+				</div>
+
+				{/* new post Nav Icon */}
+				<div
+					className='flex mx-[0.5rem]'
+				>
+					<img
+						onClick={() => navigate('/newpost')}
+						src={plusIcon}
+						alt='feed Icon'
+						className='h-[2rem] place-self-center'
+					/>
+				</div>
+
+				{/* Account/Edit Nav Icon */}
+				<div
+					className='flex mx-[0.5rem]'
+				>
+					<img
+						onClick={() => navigate('/account')}
+						src={settingIcon}
+						alt='feed Icon'
+						className='h-[2.2rem] place-self-center'
+					/>
+				</div>
+
+				{/* Log Out Nav Icon */}
+				<div
+					className='flex mx-[0.5rem]'
+				>
+					<img
+						onClick={() => {
+							handleLogout()
+							navigate('/')
+						}}
+						src={logoutIcon}
+						alt='feed Icon'
+						className='h-[2.2rem] place-self-center'
+					/>
+				</div>
+
+
+			</div>
 		</>
 	)
 
@@ -60,10 +148,17 @@ export default function Navbar({ currentUser,
 	)
 
 	return (
-		<nav>
+		<nav
+			className='flex justify-between mt-[0.5rem] mx-[20rem]'
+		>
 			{/* user always sees this section */}
-			<Link to="/">
-				<p>User App</p>
+			<Link 
+			to="/"
+			className='place-self-center ml-[1rem]'
+			>
+				<p
+				className='text-[1.5rem] font-mono italic'
+				>DelishaGram</p>
 			</Link>
 
 			{currentUser ? loggedIn : loggedOut}

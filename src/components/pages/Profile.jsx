@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export default function Profile({ currentUser, handleLogout }) {
 	// state for the secret message (aka user privilaged data)
+	const bgColor = "#50d71e"
 	const [msg, setMsg] = useState('')
 	const [userPosts, setUserPosts] = useState([])
 	// useEffect for getting the user data and checking auth
@@ -43,7 +44,10 @@ export default function Profile({ currentUser, handleLogout }) {
 		
 		return(
 			<>
-				<div key={`post-${i}`}>
+				<div 
+				key={`post-${i}`}
+				className={`flex flex-col`}
+				>
 					<h2>Restaurant: {post.dish.restaurant.name}</h2>
 					<h2>Dish : {post.dish.dishName}</h2>
 					<h2>Rate : {post.rating}</h2>
@@ -53,12 +57,18 @@ export default function Profile({ currentUser, handleLogout }) {
 	})
 	return (
 		<div>
-			<h1>Welcome, {currentUser.userName}</h1>
+			<h1
+			className='text-lg font-bold border m-3 p-6'
+			>Welcome, {currentUser.userName}</h1>
 			<h2>User Posts:</h2>
 			{msg}
 			{/* {userPost} */}
 			<h2>
+				<div
+				className='grid grid-cols-3 grid-rows-auto mx-[15rem]'
+				>
 				{userPosts.length>0 ? userPost : 'NO POST'}
+				</div>
 			</h2>
 			
 			

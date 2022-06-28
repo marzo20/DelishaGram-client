@@ -11,6 +11,7 @@ export default function NewPost({ imgUrl, setImgUrl }){
           const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
           // console.log(response)
           // setPosts([...posts, response.data])
+          
           setForm({
             restaurant: '',
             dish: '',
@@ -18,6 +19,7 @@ export default function NewPost({ imgUrl, setImgUrl }){
             content: '',
             img: ''
         })
+        
         // console.log(currentUser)
         } catch (err) {
           console.log(err)

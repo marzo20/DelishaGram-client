@@ -14,7 +14,8 @@ export default function NewPost({ handleSubmit, imgUrl, setImgUrl }){
             }}
                 handleSubmit={handleSubmit}
                 imgUrl={imgUrl}
-                setImgUrl={setImgUrl}    
+                setImgUrl={setImgUrl}  
+                rerouteUrl='/posts'
             />
         </>
     )

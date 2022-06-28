@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate , useNavigate } from 'react-router-dom'
 import FileUploadForm from '../FileUploadForm'
 import jwtDecode from 'jwt-decode'
 
 export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl }) {
+    let navigate = useNavigate()
     const [form, setForm] = useState(initialForm)
     const [pageLoaded, setPageLoaded] = useState(false)
     const token = localStorage.getItem("jwt")
@@ -16,7 +17,11 @@ export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl 
     return (
         <>
             <h1>PostForm</h1>
-            <form onSubmit={e => handleSubmit(e, form, setForm)}>
+            <form onSubmit={e => {
+                handleSubmit(e, form, setForm)
+                navigate('/posts')
+            }              
+            }>
                 <label htmlFor="restaurant">restaurant: </label>
                 <input
                     type="text"

@@ -49,7 +49,7 @@ export default function PostDetail({ currentUser }) {
             console.log('put method failed :(', err)
         }
     }
-    const handleDelete = (e) => {
+    const handleDelete = () => {
         axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
             .then(response => {
                 navigate('/posts')

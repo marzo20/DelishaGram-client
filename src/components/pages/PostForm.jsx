@@ -3,7 +3,7 @@ import { Navigate , useNavigate } from 'react-router-dom'
 import FileUploadForm from '../FileUploadForm'
 import jwtDecode from 'jwt-decode'
 
-export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl }) {
+export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl, rerouteUrl }) {
     let navigate = useNavigate()
     const [form, setForm] = useState(initialForm)
     const [pageLoaded, setPageLoaded] = useState(false)
@@ -19,7 +19,7 @@ export default function PostForm({ initialForm, handleSubmit, imgUrl, setImgUrl 
             <h1>PostForm</h1>
             <form onSubmit={e => {
                 handleSubmit(e, form, setForm)
-                navigate('/posts')
+                navigate(rerouteUrl)
             }              
             }>
                 <label htmlFor="restaurant">restaurant: </label>

@@ -1,11 +1,11 @@
 import PostForm from "./PostForm"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import FileUploadForm from '../FileUploadForm'
+import Modal from 'react-modal';
 
 export default function NewPost({ imgUrl, setImgUrl }) {
-
   let navigate = useNavigate()
   const [form, setForm] = useState({
     email: "",
@@ -15,6 +15,20 @@ export default function NewPost({ imgUrl, setImgUrl }) {
     content: '',
     img: ''
   })
+  const [modalOpen, setModalOpen] = useState(false)
+  const [yelpResults, setYelpResults] = useState([])
+  
+  Modal.setAppElement(document.getElementById("newPostContainer"))
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
   const handleSubmit = async (e, form, setForm) => {
     try {
@@ -46,28 +60,90 @@ export default function NewPost({ imgUrl, setImgUrl }) {
         }
       }
     }
+  }
 
+  const  openModal = () => {
+    setModalOpen(true);
+    handleYelpRestAPI()
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
+  }
+
+  // geo location stuff
+  useLayoutEffect(()=>{
+    if(navigator.geolocation){
+      navigator.permissions
+      .query({name: "geolocation"})
+      .then(function(result){
+        if (result.state === "granted") {
+          console.log(result.state)
+        } else if (result.state === "prompt") {
+          console.log(result.state)
+        } else if (result.state === "denied") {
+          console.log(result.state)
+        } 
+        result.onchange = () => {
+          console.log(result.state)
+        }
+      })
+    } else {
+      console.warn("sorry not available")
+    }
+  },[])
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
   }
 
 
 
+  const handleYelpRestAPI = () => {
+  
+    
+
+  }
+  
+
+
   return (
     <>
-      <h1>create newPost</h1>
-      <FileUploadForm
-        imgUrl={imgUrl}
-        setImgUrl={setImgUrl}
-        setForm={setForm}
-        form={form}
-      />
-      <PostForm 
-        form={form}
-        setForm={setForm}
-        handleSubmit={handleSubmit}
-        imgUrl={imgUrl}
-        setImgUrl={setImgUrl}
-        rerouteUrl='/posts'
-      />
+      <div id="newPostContainer">
+        <h1>create newPost</h1>
+        <FileUploadForm
+          imgUrl={imgUrl}
+          setImgUrl={setImgUrl}
+          setForm={setForm}
+          form={form}
+        />
+        <PostForm
+          form={form}
+          setForm={setForm}
+          handleSubmit={handleSubmit}
+          imgUrl={imgUrl}
+          setImgUrl={setImgUrl}
+          rerouteUrl='/posts'
+          openModal={openModal}
+          hasModal={true}
+        />
+      </div>
+      <Modal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <div
+          className="h-[30rem] w-[30rem]">
+          <button
+            onClick={closeModal}
+          >X</button>
+
+          <h1>Modal</h1>
+
+        </div>
+      </Modal>
     </>
   )
 }

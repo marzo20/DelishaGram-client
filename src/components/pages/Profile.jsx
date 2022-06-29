@@ -47,14 +47,14 @@ export default function Profile({ currentUser, handleLogout }) {
 				<Link to={`/posts/${post._id}`}>
 					<div
 						key={`post-${i}`}
-						className={`flex flex-col border m-3 p-6'`}
+						className={`md:flex flex-col border m-3 p-6'`}
 					>
 						<img src={post.image.cloud_id} alt={post.dish.dishName}/>
 					</div>
 				</Link>
 			</>
 		)
-	})
+	}).reverse()
 	return (
 		<div>
 			<h1

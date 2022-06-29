@@ -55,7 +55,7 @@ export default function Posts() {
                 </Link>
             </div>
         )
-    })
+    }).reverse()
     return (
         <div
             

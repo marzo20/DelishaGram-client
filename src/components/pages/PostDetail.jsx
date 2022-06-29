@@ -29,7 +29,7 @@ export default function PostDetail({ currentUser }) {
         rating: '',
         content: ''
     })
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -52,7 +52,7 @@ export default function PostDetail({ currentUser }) {
         }
         fetchData()
     }, [])
-   
+
     const handleSubmit = async (e, form, setForm) => {
         e.preventDefault()
         try {
@@ -72,21 +72,32 @@ export default function PostDetail({ currentUser }) {
             .catch(console.warn)
     }
     const renderDetail = (
-        <div>
-            <h1>PostDetail</h1>
-            <img src={form.img} alt={post.dish.dishName} />
-            <h3>Posted by: {post.poster.userName}</h3>
-            <h2>Dish: {post.dish.dishName}</h2>
-            <h2>Restaurant: {post.dish.restaurant.name}</h2>
-            <h2>Rate: {post.rating}</h2>
-            <p>{post.content}</p>
-            {post.poster._id === currentUser.id ? <button onClick={() => setShowForm(!showForm)}>Edit</button>
-                : ''}
-            <div>
-                {post.poster._id === currentUser.id ? <button onClick={() => handleDelete()}>Delete</button>
-                    : ''}
-
+        <div className=
+            'border-slate-100 border-2 grid grid-cols-1 max-w-2xl place-content-center'>
+                {post.poster._id === currentUser.id ? <button
+                    className="border-slate-300 border-2 w-8 justify-self-end"
+                    onClick={() => handleDelete()}>X</button>
+                    : ''}     
+            <div className="m-2 justify-self-center w-md">
+                <img src={form.img} alt={post.dish.dishName}
+                    className="w-[40rem] min-w-[40rem]" />
             </div>
+            <div className="grid grid-cols-1 justify-self-end">
+                {post.poster._id === currentUser.id ? <button
+                    className="border-slate-300 border-2 w-20"
+                    onClick={() => setShowForm(!showForm)}>Edit</button>
+                    : ''}
+            </div>
+            <div className=" justify-center">
+                <h3 className="text-lg font-sans font-bold">{post.poster.userName}</h3>
+                <h2 className="text-lg font-sans font-bold">#Dish : {post.dish.dishName}</h2>
+                <h2 className="text-lg font-sans font-bold">#Restaurant: {post.dish.restaurant.name}</h2>
+                <h2 className="text-lg font-sans font-bold">#Rate: {post.rating}</h2>
+                <p className="text-base font-sans text-center break-all">{post.content}</p>
+                
+            </div>
+
+            
         </div>
     )
     return (

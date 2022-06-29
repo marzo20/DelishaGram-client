@@ -35,26 +35,24 @@ export default function Posts() {
                         className='flex flex-col border my-[1rem] mx-[33rem]'
                     >
                         <h2
-                            className="text-start font-['Roboto']"
+                            className="text-start font-['Roboto'] pl-2 pt-1 font-bold text-lg tracking-wide"
                         >
                             {post.poster.userName ? post.poster.userName : ''}
                         </h2>
+                        <p
+                          className="text-start font-['Roboto'] pl-3 pb-1 text-sm"  
+                        >
+                            {post.dish.restaurant.name ? post.dish.restaurant.name : ''}
+                        </p>
                         <img
                             className="w-[40rem] min-w-[40rem]"
                             src={post.image.cloud_id} 
                             alt={post.dish.dishName}
                         />
-                        <h2
-                            className="text-start font-['Roboto']"
-                        >
-                            {post.poster.userName ? post.poster.userName : ''}
-                        </h2>
-                        <h1
-                          className="text-start font-['Roboto']"  
-                        >{post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
-                        <h2
-                            className="text-start font-['Roboto']"
-                        >{post.dish.dishName ? post.dish.dishName : ''}</h2>
+                        
+                        <p
+                            className="text-start font-['Roboto'] pl-3 text-md font-md"
+                        >{post.dish.dishName ? post.dish.dishName : ''}</p>
                         
                     </div>
                 </Link>

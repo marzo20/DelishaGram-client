@@ -10,6 +10,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
   const [form, setForm] = useState({
     email: "",
     restaurant: '',
+    location: "",
     dish: '',
     rating: '',
     content: '',
@@ -17,36 +18,70 @@ export default function NewPost({ imgUrl, setImgUrl }) {
   })
   const [modalOpen, setModalOpen] = useState(false)
   const [yelpResults, setYelpResults] = useState({
-    businesses:[{
-      location:{}
+    businesses: [{
+      location: {}
     }],
-    region:{},
-    total:0
+    region: {},
+    total: 0
   })
   const [pickedRestId, setPickedRestId] = useState("")
   const [lat, setLat] = useState("")
   const [long, setLong] = useState("")
-  const [restSearch, setRestSearch] = useState("")
+  const [getLatLong, setGetLatLong] = useState(false)
+
+  const [search, setSearch] = useState("")
+  const [location, setLocation] = useState("")
+  
+
+  // geo location stuff
+  useLayoutEffect(() => {
+    if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(function (result) {
+          if (result.state === "granted") {
+            console.log(result.state)
+            result.onchange = () => {
+              console.log(result.state)
+            }
+            navigator.geolocation.getCurrentPosition((postion) => {
+              setLat(postion.coords.latitude)
+              console.log("latitude", lat)
+              setLong(postion.coords.longitude)
+              console.log("longitude", long)
+              setGetLatLong(true)
+            })
+          } else if (result.state === "prompt") {
+            console.log(result.state)
+          } else if (result.state === "denied") {
+            console.log(result.state)
+          }
+        })
+    } else {
+      console.warn("sorry current location not available")
+    }
+  }, [long, lat])
 
   // modal code
   Modal.setAppElement(document.getElementById("newPostContainer"))
-  
+
   const openModal = () => {
-    handleYelpRestAPI()
+    setModalOpen(true);
   }
   const closeModal = () => {
     setModalOpen(false);
   }
 
   // function to get yelp data
-  const handleYelpRestAPI = async () => {
-    const SearchTerm = "pizza"
+  const handleYelpRestAPI = async (e) => {
+    e.preventDefault()
+    // const SearchTerm = "pizza"
     const reqParams = {
       params: {
         lat,
         long,
-        term: SearchTerm,
-
+        term: search,
+        location: location
       }
     }
     const yelpResponse = await axios
@@ -54,7 +89,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
     console.log(yelpResponse.data)
     setYelpResults(yelpResponse.data)
     console.log(yelpResults)
-    setModalOpen(true);
+
   }
 
   const customStyles = {
@@ -101,62 +136,27 @@ export default function NewPost({ imgUrl, setImgUrl }) {
     }
   }
 
-
-
-
-  // geo location stuff
-  useLayoutEffect(() => {
-    if (navigator.geolocation) {
-      navigator.permissions
-        .query({ name: "geolocation" })
-        .then(function (result) {
-          if (result.state === "granted") {
-            console.log(result.state)
-            result.onchange = () => {
-              console.log(result.state)
-            }
-            navigator.geolocation.getCurrentPosition((postion) => {
-              setLat(postion.coords.latitude)
-              console.log("latitude", lat)
-              setLong(postion.coords.longitude)
-              console.log("longitude", long)
-            })
-          } else if (result.state === "prompt") {
-            console.log(result.state)
-          } else if (result.state === "denied") {
-            console.log(result.state)
-          }
-        })
-    } else {
-      console.warn("sorry current location not available")
-    }
-  }, [])
-
   const options = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0,
   }
 
-
-
-  
-
-  const showYelpResults = yelpResults.businesses.map((business)=>{
-    return(
+  const showYelpResults = yelpResults.businesses.map((business) => {
+    return (
       <>
         <div
-        className="flex">
-            <div>
-              <img 
+          className="flex">
+          <div>
+            <img
               className="w-[75px]"
               src={business.image_url} alt={`image of ${business.name}`} />
-            </div>
-            <div>
-              <p>{business.name}</p>
-              <p>{business.location.address1}</p>
-              <p>{business.location.city}</p>
-            </div>
+          </div>
+          <div>
+            <p>{business.name}</p>
+            <p>{business.location.address1}</p>
+            <p>{business.location.city}</p>
+          </div>
         </div>
       </>
     )
@@ -164,7 +164,8 @@ export default function NewPost({ imgUrl, setImgUrl }) {
 
 
   return (
-    <>
+    <>{
+      getLatLong ? 
       <div id="newPostContainer">
         <h1>create newPost</h1>
         <FileUploadForm
@@ -184,6 +185,8 @@ export default function NewPost({ imgUrl, setImgUrl }) {
           hasModal={true}
         />
       </div>
+      : ""
+    }
       <Modal
         isOpen={modalOpen}
         onRequestClose={closeModal}
@@ -194,6 +197,29 @@ export default function NewPost({ imgUrl, setImgUrl }) {
           <button
             onClick={closeModal}
           >X</button>
+          <form
+            onSubmit={handleYelpRestAPI}>
+            <input
+              className="border"
+              placeholder="search"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            <input
+              placeholder="location"
+              className="border"
+              list="locations"
+              value={location}
+              defaultValue="Current Location"
+              onChange={e => setLocation(e.target.value)}
+            />
+            <datalist id="locations">
+              <option value="Current Location">Current Location</option>
+
+            </datalist>
+
+            <button>Search</button>
+          </form>
           {showYelpResults}
         </div>
       </Modal>

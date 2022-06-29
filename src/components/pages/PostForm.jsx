@@ -49,10 +49,11 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openMo
                     className={inputStyle}
                     type="text"
                     id='restaurant'
-                    placeholder='Flemings'
+                    placeholder='Select a Restaurant'
                     value={form.restaurant}
                     onChange={e => setForm({ ...form, restaurant: e.target.value })}
                     required
+                    readOnly
                 />
                 </div>
 

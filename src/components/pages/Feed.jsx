@@ -49,10 +49,11 @@ export default function Posts() {
                             src={post.image.cloud_id} 
                             alt={post.dish.dishName}
                         />
-                        
                         <p
                             className="text-start font-['Roboto'] pl-3 pt-2 pb-2 text-md font-semibold "
-                        >{post.dish.dishName ? post.dish.dishName : ''}</p>
+                        >
+                            {post.dish.dishName ? post.dish.dishName : ''}
+                        </p>
                         
                     </div>
                 </Link>

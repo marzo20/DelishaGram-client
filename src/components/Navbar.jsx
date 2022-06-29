@@ -69,7 +69,7 @@ export default function Navbar({ currentUser,
 					className='flex mx-[0.5rem]'
 				>
 					<img
-						onClick={() => navigate('/posts')}
+						onClick={() => navigate('/feed')}
 						src={feedIcon}
 						alt='feed Icon'
 						className='h-[2rem] place-self-center'

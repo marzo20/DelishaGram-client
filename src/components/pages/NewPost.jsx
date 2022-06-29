@@ -48,7 +48,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
       })
       // setIsLoaded(true)
 
-      navigate('/posts')
+      navigate('/feed')
 
       // console.log(currentUser)
     } catch (err) {

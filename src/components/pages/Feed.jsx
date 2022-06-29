@@ -32,7 +32,7 @@ export default function Posts() {
                 <Link to={`/posts/${post._id}`}>
                     <div 
                         key={`post_${i}`}
-                        className='flex flex-col items-center border my-[1rem] mx-[33rem] px-1'
+                        className='flex flex-col items-center border my-[1rem] mx-[33rem]'
                     >
                         <h2
                             className=""

@@ -67,7 +67,7 @@ export default function PostDetail({ currentUser }) {
     const handleDelete = () => {
         axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
             .then(response => {
-                navigate('/posts')
+                navigate('/profile')
             })
             .catch(console.warn)
     }

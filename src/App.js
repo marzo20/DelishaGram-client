@@ -12,7 +12,7 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import NewPost from './components/pages/NewPost'
-import Posts from './components/pages/Posts'
+import Feed from './components/pages/Feed'
 import PostDetail from './components/pages/PostDetail'
 import SearchResults from './components/pages/SearchResults'
 import Account from './components/pages/Account'
@@ -110,8 +110,8 @@ function App() {
             />}
           />
           <Route
-            path="/posts"
-            element={<Posts />}
+            path="/feed"
+            element={<Feed />}
           />
           <Route
             path="/searchresults"

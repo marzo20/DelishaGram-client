@@ -35,7 +35,7 @@ export default function Posts() {
                         className='flex flex-col border my-[1rem] mx-[33rem]'
                     >
                         <h2
-                            className="text-start"
+                            className="text-start font-['Roboto']"
                         >
                             {post.poster.userName ? post.poster.userName : ''}
                         </h2>

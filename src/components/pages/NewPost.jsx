@@ -122,15 +122,16 @@ export default function NewPost({ imgUrl, setImgUrl }) {
       }
     }
 
-    const reqBody = {
-      lat,
-      long,
-      key: process.env.REACT_APP_YELP_API_KEY,
-      term:SearchTerm
+    const reqParams = {
+      params: {
+        lat,
+        long,
+        term:SearchTerm
+      }
     }
     const yelpResponse = await axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/api-v1/restaurants`, reqBody)
-    console.log(yelpResponse)
+    .get(`${process.env.REACT_APP_SERVER_URL}/api-v1/restaurants/yelpApi`, reqParams)
+    console.log(yelpResponse.data)
     setModalOpen(true);
   }
   

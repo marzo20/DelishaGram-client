@@ -32,15 +32,15 @@ export default function Posts() {
                 <Link to={`/posts/${post._id}`}>
                     <div 
                         key={`post_${i}`}
-                        className='flex flex-col border my-[1rem] mx-[33rem]'
+                        className='flex flex-col border my-[1rem] mx-[33rem] shadow-md rounded-lg'
                     >
                         <h2
-                            className="text-start font-['Roboto'] pl-2 pt-1 font-bold text-lg tracking-wide"
+                            className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
                         >
                             {post.poster.userName ? post.poster.userName : ''}
                         </h2>
                         <p
-                          className="text-start font-['Roboto'] pl-3 pb-1 text-sm"  
+                          className="text-start font-['Roboto'] pl-5 pb-2 text-sm font-thin"  
                         >
                             {post.dish.restaurant.name ? post.dish.restaurant.name : ''}
                         </p>
@@ -51,7 +51,7 @@ export default function Posts() {
                         />
                         
                         <p
-                            className="text-start font-['Roboto'] pl-3 text-md font-md"
+                            className="text-start font-['Roboto'] pl-3 pt-2 pb-2 text-md font-semibold "
                         >{post.dish.dishName ? post.dish.dishName : ''}</p>
                         
                     </div>

@@ -26,24 +26,42 @@ export default function Posts() {
 
     const post = posts.map((post, i) => {
         return (
-            <>
+            <div
+            className=''
+            >
                 <Link to={`/posts/${post._id}`}>
-                    <div key={`post_${i}`}>
-                        <h2>{post.poster.userName ? post.poster.userName : ''}</h2>
-                        <img src={post.image.cloud_id} alt={post.dish.dishName}/>
-                        <h1>{post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
-                        <h2>{post.dish.dishName ? post.dish.dishName : ''}</h2>
+                    <div 
+                        key={`post_${i}`}
+                        className='flex flex-col items-center border my-[1rem] mx-[33rem] px-1 min-px-1'
+                    >
+                        <h2
+                            className=""
+                        >
+                            {post.poster.userName ? post.poster.userName : ''}
+                        </h2>
+                        <img
+                            className="w-[40rem] min-w-[40rem]"
+                            src={post.image.cloud_id} 
+                            alt={post.dish.dishName}
+                        />
+                        <h1
+                          className=""  
+                        >{post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
+                        <h2
+                            className=""
+                        >{post.dish.dishName ? post.dish.dishName : ''}</h2>
                         
                     </div>
                 </Link>
-            </>
+            </div>
         )
     })
     return (
-        <>
-            <h1>Render all posts</h1>
+        <div
+            
+        >   
             {posts.length > 0 ? post : msg}
-            {/* {post} */}
-        </>
+        </div>
     )
 }
+

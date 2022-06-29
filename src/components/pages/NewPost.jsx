@@ -87,6 +87,10 @@ export default function NewPost({ imgUrl, setImgUrl }) {
         result.onchange = () => {
           console.log(result.state)
         }
+        navigator.geolocation.getCurrentPosition((postion)=>{
+          console.log("lat", postion.coords.latitude)
+          console.log("long", postion.coords.longitude)
+        })
       })
     } else {
       console.warn("sorry not available")

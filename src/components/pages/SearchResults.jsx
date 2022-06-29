@@ -3,22 +3,23 @@ import { useState, useEffect } from "react"
 import PostPreview from "../PostPreview"
 import axios from "axios"
 
-export default function SearchResults(){
+export default function SearchResults() {
     const [msg, setMsg] = useState("")
     const [getResponse, setGetResponse] = useState(false)
     const [dishResults, setDishResults] = useState({
-        posts:[{
+        posts: [{
             dish: {
-                restaurant:{}
+                restaurant: {}
             },
-            poster:{}
+            image: {},
+            poster: {}
         }]
     })
     const location = useLocation()
-    console.log("location: ",location)
-    useEffect( ()=>{
+    console.log("location: ", location)
+    useEffect(() => {
         fetchDishes()
-    },[location])
+    }, [location])
 
     const fetchDishes = async () => {
         try {
@@ -28,41 +29,47 @@ export default function SearchResults(){
                 setGetResponse(false)
                 setMsg("No dishes found")
                 setDishResults({
-                    posts:[{
+                    posts: [{
                         dish: {
-                            restaurant:{}
+                            restaurant: {}
                         },
-                        poster:{}
+                        image: {},
+                        poster: {}
                     }]
                 })
             } else {
                 setGetResponse(true)
                 setDishResults(dishResponse.data)
             }
-            console.log("dishResponse: ",dishResponse)
+            console.log("dishResponse: ", dishResponse)
         } catch (error) {
             console.log(error)
         }
     }
 
-    
-    const renderResults = dishResults.posts.map((result)=>{
-        return(
+
+    const renderResults = dishResults.posts.map((result) => {
+        return (
             <>
                 <PostPreview
-                    dishName = {result.dish.dishName}
-                    restaurantName = {result.dish.restaurant.name}
-                    userName = {result.poster.userName}
+                    postId={result._id}
+                    image={result.image.cloud_id}
+                    dishName={result.dish.dishName}
+                    restaurantName={result.dish.restaurant.name}
+                    userName={result.poster.userName}
                 />
             </>
         )
     })
-    
-    return(
+
+    return (
         <>
             <h1>Search Results:</h1>
             {/* {httpStatus === 200 ? renderResults : msg} */}
-            {getResponse ? renderResults : msg}
+            <div
+            className="grid grid-cols-3">
+                {getResponse ? renderResults : msg}
+            </div>
         </>
     )
 }

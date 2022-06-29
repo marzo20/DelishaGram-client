@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom'
 
 export default function Login({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -46,15 +46,17 @@ export default function Login({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div className='border border-2 w-[30rem] h-[30rem]'>
-			<h1>Login to Your Account:</h1>
+		<div className='flex border border-2 justify-center mx-auto mt-[10rem] w-[30rem] h-[30rem]'>
+			<div
+			className='place-self-center flex flex-col'
+			>
+			<h1>Login Here:</h1>	
 
-			<p>{msg}</p>
-
-			<form onSubmit={handleSubmit} className="flex-col">
-				<div>
+			<form onSubmit={handleSubmit} className="flex flex-col content-center">
+				<div className='grid grid-cols-2 py-2'>
 					<label htmlFor='email'>Email:</label>
 					<input
+					className='border border-sm text-center'
 						type="email"
 						id="email"
 						placeholder='your email...'
@@ -62,9 +64,11 @@ export default function Login({ currentUser, setCurrentUser }) {
 						value={email}
 					/>
 				</div>
-				<div>
+
+				<div  className='grid grid-cols-2 py-2'>
 					<label htmlFor='password'>Password:</label>
 					<input
+					className='border border-sm text-center'
 						type="password"
 						id="password"
 						placeholder='password...'
@@ -73,8 +77,19 @@ export default function Login({ currentUser, setCurrentUser }) {
 					/>
 				</div>
 
-				<button type="submit">Login</button>
+				<button 
+				className='border border-sm w-40 place-self-center'
+				type="submit">Login</button>
 			</form>
+			<p>{msg}</p>
+			<div>
+					<Link to="/register"> 
+					<p
+					className='underline underline-offset-4 pt-[1rem]'
+					>Not Registered? Sign Up Here!</p>
+					</Link>
+			</div>
+			</div>
 		</div>
 	)
 }

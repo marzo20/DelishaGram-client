@@ -17,7 +17,9 @@ export default function NewPost({ imgUrl, setImgUrl }) {
   })
   const [modalOpen, setModalOpen] = useState(false)
   const [yelpResults, setYelpResults] = useState({
-    businessnes:[{}],
+    businesses:[{
+      location:{}
+    }],
     region:{},
     total:0
   })
@@ -43,7 +45,8 @@ export default function NewPost({ imgUrl, setImgUrl }) {
       params: {
         lat,
         long,
-        term: SearchTerm
+        term: SearchTerm,
+
       }
     }
     const yelpResponse = await axios

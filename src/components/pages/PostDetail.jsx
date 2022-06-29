@@ -42,7 +42,8 @@ export default function PostDetail({ currentUser }) {
                     restaurant: response.data.dish.restaurant.name,
                     dish: response.data.dish.dishName,
                     rating: response.data.rating,
-                    content: response.data.content
+                    content: response.data.content,
+                    img: response.data.image.cloud_id
                 })
                 console.log('what is in post', post)
             } catch (err) {
@@ -73,7 +74,7 @@ export default function PostDetail({ currentUser }) {
     const renderDetail = (
         <div>
             <h1>PostDetail</h1>
-            <img src={post.image.cloud_id} alt={post.dish.dishName} />
+            <img src={form.img} alt={post.dish.dishName} />
             <h3>Posted by: {post.poster.userName}</h3>
             <h2>Dish: {post.dish.dishName}</h2>
             <h2>Restaurant: {post.dish.restaurant.name}</h2>

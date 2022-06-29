@@ -13,24 +13,24 @@ export default function ProfileEdit() {
     const [verifyNewPassword, setVerifyNewPassword] = useState("")
 
     const [msg, setMsg] = useState("")
-    
 
-    
-    useEffect(()=>{
+
+
+    useEffect(() => {
         const getUserInfo = async () => {
             const jwtToken = localStorage.getItem("jwt")
             const decoded = jwt_decode(jwtToken)
             // setEmail(userEmail)
             console.log(decoded.id)
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${decoded.id}`)
-            console.log("useEff response:",response.data)
+            console.log("useEff response:", response.data)
             setUserName(response.data.userName)
             setFirstName(response.data.firstName)
             setLastName(response.data.lastName)
             setEmail(response.data.email)
         }
         getUserInfo()
-    },[])
+    }, [])
 
     const handleEditUserSubmit = async (e) => {
         e.preventDefault()
@@ -43,7 +43,7 @@ export default function ProfileEdit() {
             lastName,
             email
         }
-        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${decoded.id}`,userInfoReqBody)
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${decoded.id}`, userInfoReqBody)
         // console.log("put response:",response.data)
         setUserName(response.data.userName)
         setFirstName(response.data.firstName)
@@ -59,17 +59,17 @@ export default function ProfileEdit() {
         const userId = decoded.id
         console.log(userId)
 
-        if (newPassword !== verifyNewPassword){
+        if (newPassword !== verifyNewPassword) {
             setMsg("Password Validation Failed, new password and verify new password must be the same")
             console.log(msg)
             return
         }
 
         // console.log("change password")
-        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/changepassword`,{
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/changepassword`, {
             currentPassword,
             newPassword,
-            userId 
+            userId
         })
         // console.log(passwordReqBody)
         console.log(response)
@@ -77,73 +77,91 @@ export default function ProfileEdit() {
     }
 
     return (
-        <div>
-            <h1>UserName</h1>
-            <form onSubmit={handleEditUserSubmit}>
-                <div>
-                    <label htmlFor="username">User Name: </label>
-                    <input
-                        id="username"
-                        value={userName}
-                        onChange={e => { setUserName(e.target.value) }}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="firstName">First Name:</label>
-                    <input
-                        id="firstName"
-                        value={firstName}
-                        onChange={e => { setFirstName(e.target.value) }}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="lastName">Last Name: </label>
-                    <input
-                        id="lastName"
-                        value={lastName}
-                        onChange={e => { setLastName(e.target.value) }}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email: </label>
-                    <input
-                        id="email"
-                        value={email}
-                        onChange={e => { setEmail(e.target.value) }}
-                    />
-                </div>
-                <button type="submit">Update Info</button>
-            </form>
-            <form onSubmit={handleChangePasswordSubmit}>
-                <div>
-                    <label htmlFor="currentPassword">Current Password: </label>
-                    <input
-                        id="currentPassword"
-                        type="password"
-                        value={currentPassword}
-                        onChange={e => { setCurrentPassword(e.target.value) }}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="newPassword">New Password: </label>
-                    <input
-                        id="newPassword"
-                        type="password"
-                        value={newPassword}
-                        onChange={e => { setNewPassword(e.target.value) }}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="verifyNewPassword">Verify New Password: </label>
-                    <input
-                        id="verifyNewPassword"
-                        type="password"
-                        value={verifyNewPassword}
-                        onChange={e => { setVerifyNewPassword(e.target.value) }}
-                    />
-                </div>
-                <button type="submit">Change Password</button>
-            </form>
+        <div className="grid grid-cols-2 gap-10 m-20">
+            <div>
+                <h1>User Information</h1>
+                <form onSubmit={handleEditUserSubmit}>
+
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="username">User Name: </label>
+                        <input
+                        className="border border-sm"
+                            id="username"
+                            value={userName}
+                            onChange={e => { setUserName(e.target.value) }}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="firstName">First Name:</label>
+                        <input
+                        className="border border-sm"
+                            id="firstName"
+                            value={firstName}
+                            onChange={e => { setFirstName(e.target.value) }}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="lastName">Last Name: </label>
+                        <input
+                        className="border border-sm"
+                            id="lastName"
+                            value={lastName}
+                            onChange={e => { setLastName(e.target.value) }}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="email">Email: </label>
+                        <input
+                        className="border border-sm"
+                            id="email"
+                            value={email}
+                            onChange={e => { setEmail(e.target.value) }}
+                        />
+                    </div>
+                    <button 
+                    className="border border-sm w-36 m-2"
+                    type="submit">Update Info</button>
+                </form>
+            </div>
+            <div>
+                <h1>Password</h1>
+                <form 
+                onSubmit={handleChangePasswordSubmit}>
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="currentPassword">Current Password: </label>
+                        <input
+                        className="border border-sm"
+                            id="currentPassword"
+                            type="password"
+                            value={currentPassword}
+                            onChange={e => { setCurrentPassword(e.target.value) }}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="newPassword">New Password: </label>
+                        <input
+                        className="border border-sm"
+                            id="newPassword"
+                            type="password"
+                            value={newPassword}
+                            onChange={e => { setNewPassword(e.target.value) }}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 m-2">
+                        <label htmlFor="verifyNewPassword">Verify New Password: </label>
+                        <input
+                        className="border border-sm"
+                            id="verifyNewPassword"
+                            type="password"
+                            value={verifyNewPassword}
+                            onChange={e => { setVerifyNewPassword(e.target.value) }}
+                        />
+                    </div>
+                    <button 
+                    className="border border-sm m-2 w-36"
+                    type="submit">Change Password</button>
+                </form>
+            </div>
         </div>
     )
 }

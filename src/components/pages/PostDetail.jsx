@@ -74,30 +74,34 @@ export default function PostDetail({ currentUser }) {
     const renderDetail = (
         <div className=
             'border-slate-100 border-2 grid grid-cols-1 max-w-2xl place-content-center'>
-                {post.poster._id === currentUser.id ? <button
-                    className="border-slate-300 border-2 w-8 justify-self-end"
-                    onClick={() => handleDelete()}>X</button>
-                    : ''}     
+
             <div className="m-2 justify-self-center w-md">
                 <img src={form.img} alt={post.dish.dishName}
                     className="w-[40rem] min-w-[40rem]" />
             </div>
-            <div className="grid grid-cols-1 justify-self-end">
-                {post.poster._id === currentUser.id ? <button
-                    className="border-slate-300 border-2 w-20"
-                    onClick={() => setShowForm(!showForm)}>Edit</button>
-                    : ''}
-            </div>
-            <div className=" justify-center">
-                <h3 className="text-lg font-sans font-bold">{post.poster.userName}</h3>
+
+                <div className="grid grid-cols-2">
+                    <h3 className="text-lg font-sans font-bold justify-self-start">{post.poster.userName}</h3>
+                    <h2 className="text-lg font-sans font-bold justify-self-center">#Rate: {post.rating}</h2>
+                </div>
+            <div className="justify-self-start">
                 <h2 className="text-lg font-sans font-bold">#Dish : {post.dish.dishName}</h2>
                 <h2 className="text-lg font-sans font-bold">#Restaurant: {post.dish.restaurant.name}</h2>
-                <h2 className="text-lg font-sans font-bold">#Rate: {post.rating}</h2>
                 <p className="text-base font-sans text-center break-all">{post.content}</p>
-                
+
+            </div>
+            <div className="grid grid-cols-2 text-blue-600">
+                {post.poster._id === currentUser.id ? <button
+                    className="border-slate-300 border-2 w-20 justify-start"
+                    onClick={() => setShowForm(!showForm)}>Edit</button>
+                    : ''}
+                {post.poster._id === currentUser.id ? <button
+                    className="border-slate-300 border-2 w-20 text-red-600 justify-self-end"
+                    onClick={() => handleDelete()}>Delete</button>
+                    : ''}
             </div>
 
-            
+
         </div>
     )
     return (

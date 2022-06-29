@@ -29,7 +29,7 @@ export default function Posts() {
             <>
                 <Link to={`/posts/${post._id}`}>
                     <div key={`post_${i}`}>
-                        
+                        <h2>{post.poster.userName ? post.poster.userName : ''}</h2>
                         <img src={post.image.cloud_id} alt={post.dish.dishName}/>
                         <h1>{post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
                         <h2>{post.dish.dishName ? post.dish.dishName : ''}</h2>

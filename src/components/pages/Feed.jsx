@@ -45,15 +45,15 @@ export default function Posts() {
                             alt={post.dish.dishName}
                         />
                         <h2
-                            className="text-start"
+                            className="text-start font-['Roboto']"
                         >
                             {post.poster.userName ? post.poster.userName : ''}
                         </h2>
                         <h1
-                          className="text-start"  
+                          className="text-start font-['Roboto']"  
                         >{post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
                         <h2
-                            className="text-start"
+                            className="text-start font-['Roboto']"
                         >{post.dish.dishName ? post.dish.dishName : ''}</h2>
                         
                     </div>

@@ -10,7 +10,8 @@ export default function Posts() {
                     name: ''
                 }
             },
-            poster:{}
+            poster:{},
+            image:{}
         }]
     )
     useEffect(() => {
@@ -28,9 +29,9 @@ export default function Posts() {
             <>
                 <Link to={`/posts/${post._id}`}>
                     <div key={`post_${i}`}>
-                        <h1>Restaurant: {post.dish.restaurant.name}</h1>
-                        <h2>Dish: {post.dish.dishName ? post.dish.dishName : ''}</h2>
-                        <h3>Rate: {post.rating ? post.rating : ''}</h3>
+                        <h1>Restaurant: {post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
+                        <h2>{post.dish.dishName ? post.dish.dishName : ''}</h2>
+                        
                     </div>
                 </Link>
             </>

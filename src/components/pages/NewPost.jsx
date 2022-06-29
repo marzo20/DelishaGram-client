@@ -17,6 +17,9 @@ export default function NewPost({ imgUrl, setImgUrl }) {
   })
   const [modalOpen, setModalOpen] = useState(false)
   const [yelpResults, setYelpResults] = useState([])
+  const [lat, setLat] = useState("")
+  const [long, setLong] = useState("")
+  const [restSearch, setRestSearch] = useState("")
   
   Modal.setAppElement(document.getElementById("newPostContainer"))
   const customStyles = {
@@ -63,7 +66,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
   }
 
   const  openModal = () => {
-    setModalOpen(true);
+    
     handleYelpRestAPI()
   }
 
@@ -79,21 +82,26 @@ export default function NewPost({ imgUrl, setImgUrl }) {
       .then(function(result){
         if (result.state === "granted") {
           console.log(result.state)
+          result.onchange = () => {
+            console.log(result.state)
+          }
+
+          navigator.geolocation.getCurrentPosition((postion)=>{
+            setLat(postion.coords.latitude)
+            console.log("latitude",lat)
+            setLong(postion.coords.longitude)
+            console.log("longitude",long)
+          })
         } else if (result.state === "prompt") {
           console.log(result.state)
         } else if (result.state === "denied") {
           console.log(result.state)
         } 
-        result.onchange = () => {
-          console.log(result.state)
-        }
-        navigator.geolocation.getCurrentPosition((postion)=>{
-          console.log("lat", postion.coords.latitude)
-          console.log("long", postion.coords.longitude)
-        })
+
+
       })
     } else {
-      console.warn("sorry not available")
+      console.warn("sorry current location not available")
     }
   },[])
   const options = {
@@ -104,10 +112,26 @@ export default function NewPost({ imgUrl, setImgUrl }) {
 
 
 
-  const handleYelpRestAPI = () => {
-  
-    
+  const handleYelpRestAPI = async () => {
+    const SearchTerm = "pizza"
+    const header = {
+      headers: {
+        "Authorization" : `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
+        "Access-Control-Allow-Origin": "http://localhost:3000/",
+        "Vary":"Origin"
+      }
+    }
 
+    const reqBody = {
+      lat,
+      long,
+      key: process.env.REACT_APP_YELP_API_KEY,
+      term:SearchTerm
+    }
+    const yelpResponse = await axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/api-v1/restaurants`, reqBody)
+    console.log(yelpResponse)
+    setModalOpen(true);
   }
   
 

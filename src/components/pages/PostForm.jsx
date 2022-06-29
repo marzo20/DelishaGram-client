@@ -1,13 +1,19 @@
-import { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import jwtDecode from 'jwt-decode'
 
-export default function PostForm({ form, setForm, handleSubmit, hasModal, openModal, setModalOpen }) {
-    let navigate = useNavigate()
-
-    const [pageLoaded, setPageLoaded] = useState(false)
+export default function PostForm({ form, setForm, handleSubmit, hasModal, openModal, setModalOpen }) {   
     const token = localStorage.getItem("jwt")
     const user = jwtDecode(token)
+
+    // styling classes:
+    const buttonStyle = "border bg-slate-100"
+
+    const inputDivStyle = "my-[5px] grid grid-cols-3"
+    const labelStyle = ""
+    const inputStyle = "border text-center col-span-2"
+
+    const textAreaStyle = "resize-y border col-span-2"
+
     useEffect(() => {
         setForm({ ...form, email: user.email })
         console.log("current user", user)
@@ -15,54 +21,77 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openMo
 
     return (
         <>
-            <form onSubmit={e => {
+            <form 
+            className='border flex flex-col'
+            onSubmit={e => {
                 handleSubmit(e, form, setForm)
                 // navigate(rerouteUrl)
             }
             }>
                 <div>
-                <label htmlFor="restaurant">restaurant: </label>
-                <input
-                    type="text"
-                    id='restaurant'
-                    value={form.restaurant}
-                    onChange={e => setForm({ ...form, restaurant: e.target.value })}
-                    required
-                />
                 {hasModal ?
                     <button
+                    className={`${buttonStyle}`}
                         type='button'
                         onClick={openModal}
                     >
-                        Search Restaurants
+                        Add a Restaurant
                     </button>
                     :
                     ""
                 }
+                <div
+                className={inputDivStyle}>
+                <label 
+                className={labelStyle}
+                htmlFor="restaurant">Restaurant</label>
+                <input
+                    className={inputStyle}
+                    type="text"
+                    id='restaurant'
+                    placeholder='Flemings'
+                    value={form.restaurant}
+                    onChange={e => setForm({ ...form, restaurant: e.target.value })}
+                    required
+                />
                 </div>
-                <div>
+
+                </div>
+                <div
+                className={inputDivStyle}
+                >
                 <label htmlFor="dish">dish: </label>
                 <input
+                className={inputStyle}
                     type="text"
                     id='dish'
+                    placeholder='Bone Marrow Pasta'
                     value={form.dish}
                     onChange={e => setForm({ ...form, dish: e.target.value })}
                     required
                 />
                 </div>
-                <div>
+                <div
+                className={inputDivStyle}
+                >
                 <label htmlFor="rating">rating: </label>
                 <input
+                className={inputStyle}
                     type="number"
                     id='rating'
+                    min="1"
+                    max="5"
                     value={form.rating}
                     onChange={e => setForm({ ...form, rating: e.target.value })}
                     required
                 />
                 </div>
-                <div>
+                <div
+                className={inputDivStyle}
+                >
                 <label htmlFor="content">content: </label>
-                <input
+                <textarea
+                className={textAreaStyle}
                     type="text"
                     id="content"
                     value={form.content}
@@ -70,7 +99,12 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openMo
                     required
                 />
                 </div>
-                <button type="submit">Submit</button>
+                <div 
+                className='flex justify-center my-[10px]'>
+                <button 
+                className={`${buttonStyle} w-[100px]`}
+                type="submit">Share!</button>
+                </div>
             </form>
 
         </>

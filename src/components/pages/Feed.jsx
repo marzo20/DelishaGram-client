@@ -32,10 +32,10 @@ export default function Posts() {
                 <Link to={`/posts/${post._id}`}>
                     <div 
                         key={`post_${i}`}
-                        className='flex flex-col items-center border my-[1rem] mx-[33rem]'
+                        className='flex flex-col border my-[1rem] mx-[33rem]'
                     >
                         <h2
-                            className=""
+                            className="text-start"
                         >
                             {post.poster.userName ? post.poster.userName : ''}
                         </h2>
@@ -44,11 +44,16 @@ export default function Posts() {
                             src={post.image.cloud_id} 
                             alt={post.dish.dishName}
                         />
+                        <h2
+                            className="text-start"
+                        >
+                            {post.poster.userName ? post.poster.userName : ''}
+                        </h2>
                         <h1
-                          className=""  
+                          className="text-start"  
                         >{post.dish.restaurant.name ? post.dish.restaurant.name : ''}</h1>
                         <h2
-                            className=""
+                            className="text-start"
                         >{post.dish.dishName ? post.dish.dishName : ''}</h2>
                         
                     </div>

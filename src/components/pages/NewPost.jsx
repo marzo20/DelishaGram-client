@@ -43,7 +43,8 @@ export default function NewPost({ imgUrl, setImgUrl }) {
       params: {
         lat,
         long,
-        term: SearchTerm
+        term: SearchTerm,
+        
       }
     }
     const yelpResponse = await axios

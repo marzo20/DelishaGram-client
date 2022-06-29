@@ -23,7 +23,13 @@ export default function PostDetail({ currentUser }) {
             cloud_id: ''
         }
     })
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({
+        restaurant: '',
+        dish: '',
+        rating: '',
+        content: ''
+    })
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -32,6 +38,12 @@ export default function PostDetail({ currentUser }) {
 
                 //    const newPost = response.data
                 setPost(response.data)
+                setForm({
+                    restaurant: response.data.dish.restaurant.name,
+                    dish: response.data.dish.dishName,
+                    rating: response.data.rating,
+                    content: response.data.content
+                })
                 console.log('what is in post', post)
             } catch (err) {
                 console.log(err)
@@ -39,6 +51,7 @@ export default function PostDetail({ currentUser }) {
         }
         fetchData()
     }, [])
+   
     const handleSubmit = async (e, form, setForm) => {
         e.preventDefault()
         try {
@@ -79,12 +92,7 @@ export default function PostDetail({ currentUser }) {
         <>
             {showForm ?
                 <PostForm
-                    form={{
-                        restaurant: post.dish.restaurant.name,
-                        dish: post.dish.dishName,
-                        rating: post.rating,
-                        content: post.content
-                    }}
+                    form={form}
                     setForm={setForm}
                     handleSubmit={handleSubmit}
                 /> : renderDetail}

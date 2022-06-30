@@ -74,7 +74,7 @@ export default function PostDetail({ currentUser, id }) {
     const renderDetail = (
         <div
             id="whole-card-container"
-            className='flex flex-col max-w-[30rem] w-[30rem]'
+            className='flex flex-col min-w-[30rem] w-[30rem] rounded-lg'
         >
             <h2
                 id="userName-text"

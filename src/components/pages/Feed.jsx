@@ -67,6 +67,7 @@ export default function Feed({ currentUser }) {
                 >
                     {post.dish.dishName ? post.dish.dishName : ''}
                 </p>
+
             </div>
         )
     }).reverse()
@@ -82,6 +83,10 @@ export default function Feed({ currentUser }) {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
+            padding: 0,
+            overflow: 'hidden visible',
+            'max-width': '30rem',
+            'border-radius': '8px'
         },
     };
 

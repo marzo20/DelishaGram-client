@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import axios from 'axios'
 import Modal from 'react-modal';
 import PostDetail from "./PostDetail";
 
 export default function Profile({ currentUser, handleLogout }) {
+	const {userName} = useParams()
 	// state for the secret message (aka user privilaged data)
 	const bgColor = "#50d71e"
 	const [msg, setMsg] = useState('')
@@ -15,7 +16,7 @@ export default function Profile({ currentUser, handleLogout }) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const userResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${currentUser.id}`)
+				const userResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${userName}`)
 				console.log('this is user data', userResponse.data)
 				setUserPosts(userResponse.data.posts)
 				// get the token from local storage
@@ -27,11 +28,11 @@ export default function Profile({ currentUser, handleLogout }) {
 					}
 				}
 				// hit the auth locked endpoint
-				const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
+				// const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
 				// example POST with auth headers (options are always last argument)
 				// await axios.post(url, requestBody (form data), options)
 				// set the secret user message in state
-				setMsg(response.data.msg)
+				// setMsg(response.data.msg)
 			} catch (err) {
 				// if the error is a 401 -- that means that auth failed
 				console.warn(err)
@@ -44,7 +45,7 @@ export default function Profile({ currentUser, handleLogout }) {
 			}
 		}
 		fetchData()
-	}, [])
+	}, [userName])
 	const userPost = userPosts.map((post, i) => {
 		return (
 			<>
@@ -107,7 +108,7 @@ export default function Profile({ currentUser, handleLogout }) {
 		>
 			<h1
 				className='text-lg font-bold border m-3 p-6 text-center'
-			>Welcome, {currentUser.userName}</h1>
+			>{userName}</h1>
 			<h2
 			className='text-center text-3xl font-bold'
 			>My Posts</h2>

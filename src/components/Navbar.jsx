@@ -82,7 +82,7 @@ export default function Navbar({ currentUser,
 				>
 
 					<img
-						onClick={() => navigate('/profile')}
+						onClick={() => navigate(`/profile/${currentUser.userName}`)}
 						src={profileIcon}
 						alt='feed Icon'
 						className='min-w-[40px] place-self-center'

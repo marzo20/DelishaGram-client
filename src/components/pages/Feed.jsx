@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import Modal from 'react-modal';
 import PostDetail from "./PostDetail";
+import { useNavigate } from "react-router-dom";
 
 export default function Feed({ currentUser }) {
+    const navigate =useNavigate()
     const [posts, setPosts] = useState([{
         dish: {
             dishName: '',
@@ -38,7 +40,10 @@ export default function Feed({ currentUser }) {
             >
                 <h2
                     id="userName-text"
-                    className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
+                    className="
+                    text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide no-underline
+                    hover:underline"
+                    onClick={()=>{navigate(`/profile/${post.poster.userName}`)}}
                 >
                     {post.poster.userName ? post.poster.userName : ''}
                 </h2>

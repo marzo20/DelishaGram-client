@@ -52,7 +52,7 @@ export default function Posts() {
                         <p
                             className="text-start font-['Roboto'] pl-3 pt-2 pb-2 text-md font-semibold "
                         >
-                            {/* {post.dish.dishName ? post.dish.dishName : ''} */}
+                            {post.dish.dishName ? post.dish.dishName : ''}
                         </p>
                         
                     </div>
@@ -62,7 +62,7 @@ export default function Posts() {
     }).reverse()
     return (
         <div
-            
+        className="grid justify-center"    
         >   
             {posts.length > 0 ? post : msg}
         </div>

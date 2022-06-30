@@ -56,12 +56,19 @@ export default function Profile({ currentUser, handleLogout }) {
 		)
 	}).reverse()
 	return (
-		<div>
+		<div
+		
+		>
 			<h1
-				className='text-lg font-bold border m-3 p-6'
+				className='text-lg font-bold border m-3 p-6 text-center'
 			>Welcome, {currentUser.userName}</h1>
-			<h2>User Posts:</h2>
-			{msg}
+			<h2
+			className='text-center'
+			>User Posts:</h2>
+			<p
+			className='text-center'
+			>{msg}</p>
+			
 			{/* {userPost} */}
 			<h2>
 				<div

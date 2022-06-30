@@ -80,7 +80,7 @@ function App() {
         />
       </header>
 
-      <div className="App grid justify-center">
+      <div className="">
         <Routes>
           <Route
             path="/"

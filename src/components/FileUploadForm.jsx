@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
+export default function FileUploadForm({imgUrl, setImgUrl, setForm, form, closeImageModal}) {
 
     const [formImg, setFormImg] = useState('')
     const [msg, setMsg] = useState('')
@@ -19,7 +19,7 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
             const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/images`, fd)
             console.log(response.data)
             setDisplayImg(response.data.cloudImage)
-            setForm({ ...form, img: response.data.cloudImage })
+            // setForm({ ...form, img: response.data.cloudImage })
 
         } catch (err) {
             console.warn(err)
@@ -28,8 +28,13 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
     }
 
     return (
-        <div>
+        <div
+        className='h-[50rem] w-[50rem]'
+        >
             <h4>upload a pic!</h4>
+            <div
+            className='h-[40rem]'
+            >
             {
                 displayImg
                 &&
@@ -38,6 +43,7 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
                     alt='ur pic'
                 />
             }
+            </div>
 
             <form
                 onSubmit={handleImageSubmit}
@@ -48,12 +54,21 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form}) {
                     // no value on this controlled form
                     type="file"
                     id="image"
-                    onChange={e => setFormImg(e.target.files[0])}
+                    onChange={e => {
+                        setFormImg(e.target.files[0])
+                        // handleImageSubmit()
+                    }}
                 />
 
                 <input type='submit' />
 
             </form>
+            <button
+            onClick={()=>{
+                closeImageModal()
+                setForm({ ...form, img: displayImg })
+            }}
+            >Save</button>
         </div>
     )
 }

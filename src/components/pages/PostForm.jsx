@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import jwtDecode from 'jwt-decode'
 
-export default function PostForm({ form, setForm, handleSubmit, hasModal, openModal, setModalOpen }) {   
+export default function PostForm({ form, setForm, handleSubmit, hasModal, openYelpModal }) {   
     const token = localStorage.getItem("jwt")
     const user = jwtDecode(token)
 
@@ -33,7 +33,7 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openMo
                     <button
                     className={`${buttonStyle}`}
                         type='button'
-                        onClick={openModal}
+                        onClick={openYelpModal}
                     >
                         Add a Restaurant
                     </button>

@@ -64,10 +64,10 @@ export default function SearchResults() {
 
     return (
         <>
-            <h1>Search Results:</h1>
+            <h1 className="flex justify-center m-4 text-3xl font-bold">Search Results</h1>
             {/* {httpStatus === 200 ? renderResults : msg} */}
             <div
-            className="grid grid-cols-3 mx-[15rem] max-w-[50rem] justify-items-center">
+            className="grid grid-cols-3 mx-[15rem] justify-items-center">
                 {getResponse ? renderResults : msg}
             </div>
         </>

@@ -49,17 +49,26 @@ export default function Profile({ currentUser, handleLogout }) {
 		return (
 			<>
 				{/* <Link to={`/posts/${post._id}`}> */}
-					<div
+				<div
 						key={`post-${i}`}
-						className={`md:flex flex-col border m-3 p-6'`}
+						className={`w-64 h-64 bg-black-100 relative border m-3 p-6'`}
 					>
-						<img 
+						<div
+						onClick={()=>{
+							openModal()
+                            setViewPostId(post._id)
+						}}
+                        className={`absolute inset-0 bg-cover bg-center z-0`}
+                        style={{backgroundImage: `url(${post.image.cloud_id})`}} ></div>
+						<div className="opacity-0 bg-black hover:opacity-80 duration-300 absolute inset-0 z-10 flex justify-center items-center text-3xl text-white text-center font-semibold">{post.dish.restaurant.name}</div>
+						{/* <img 
+						className={`w-64 h-64 absolute inset-0 bg-cover bg-center z-0`}
 						onClick={()=>{
 							openModal()
                             setViewPostId(post._id)
 						}}
 						src={post.image.cloud_id} 
-						alt={post.dish.dishName}/>
+						alt={post.dish.dishName}/> */}
 					</div>
 				{/* </Link> */}
 			</>
@@ -91,16 +100,13 @@ export default function Profile({ currentUser, handleLogout }) {
 				className='text-lg font-bold border m-3 p-6 text-center'
 			>Welcome, {currentUser.userName}</h1>
 			<h2
-			className='text-center'
-			>User Posts:</h2>
-			<p
-			className='text-center'
-			>{msg}</p>
+			className='text-center text-3xl font-bold'
+			>My Posts</h2>
 			
 			{/* {userPost} */}
 			<h2>
 				<div
-					className='grid grid-cols-3 grid-rows-auto mx-[15rem] items-center'
+					className='grid grid-cols-3 mx-[15rem] justify-items-center'
 				>
 					{userPosts.length > 0 ? userPost : 'NO POST'}
 				</div>

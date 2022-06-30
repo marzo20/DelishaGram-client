@@ -29,16 +29,17 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form, closeI
 
     return (
         <div
-        className='h-[50rem] w-[50rem]'
+        className='flex flex-col h-[35] w-[35] gap-2'
         >
             <h4>upload a pic!</h4>
             <div
-            className='h-[40rem]'
+            className='h-[35]'
             >
             {
                 displayImg
                 &&
                 <img
+                    className="w-[30rem] min-w-[30rem]"
                     src={displayImg}
                     alt='ur pic'
                 />
@@ -60,15 +61,18 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form, closeI
                     }}
                 />
 
-                <input type='submit' />
+                <input 
+                className="border-2 border-slate-200"
+                type='submit' />
 
             </form>
             <button
+            className="border-2 border-slate-200"
             onClick={()=>{
                 closeImageModal()
                 setForm({ ...form, img: displayImg })
             }}
-            >Save</button>
+            >Close</button>
         </div>
     )
 }

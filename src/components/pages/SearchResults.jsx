@@ -67,7 +67,7 @@ export default function SearchResults() {
             <h1>Search Results:</h1>
             {/* {httpStatus === 200 ? renderResults : msg} */}
             <div
-            className="grid grid-cols-3">
+            className="grid grid-cols-3 mx-[15rem] max-w-[50rem] justify-items-center">
                 {getResponse ? renderResults : msg}
             </div>
         </>

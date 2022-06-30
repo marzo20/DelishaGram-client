@@ -96,10 +96,11 @@ export default function Register({ currentUser, setCurrentUser }) {
 						required
 					/>
 					</div> */}
-					<div>
+					<div
+					className="flex justify-center">
 						{/* <label htmlFor='userName'>User Name:</label> */}
 						<input
-							className="border border-sm w-2/3"
+							className="border border-sm w-80"
 							type="text"
 							id="userName"
 							placeholder='User Name'
@@ -108,10 +109,11 @@ export default function Register({ currentUser, setCurrentUser }) {
 							required
 						/>
 					</div>
-					<div>
+					<div
+					className="flex justify-center">
 						{/* <label htmlFor='email'>Email:</label> */}
 						<input
-							className="border border-sm w-2/3"
+							className="border border-sm w-80"
 							type="email"
 							id="email"
 							placeholder='Email'
@@ -120,10 +122,10 @@ export default function Register({ currentUser, setCurrentUser }) {
 							required
 						/>
 					</div>
-					<div >
+					<div className="flex justify-center">
 						{/* <label htmlFor='password'>Password:</label> */}
 						<input
-							className="border border-sm justify-start w-2/3"
+							className="border border-sm w-80"
 							type="password"
 							id="password"
 							placeholder='Password'

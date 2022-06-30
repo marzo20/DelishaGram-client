@@ -4,9 +4,9 @@ import axios from 'axios'
 import PostForm from './PostForm'
 
 
-export default function PostDetail({ currentUser }) {
+export default function PostDetail({ currentUser, id }) {
     const navigate = useNavigate()
-    const { id } = useParams()
+    // const { id } = useParams()
     const [showForm, setShowForm] = useState(false)
     const [post, setPost] = useState({
         dish: {

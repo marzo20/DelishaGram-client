@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import axios from 'axios'
+import Modal from 'react-modal';
+import PostDetail from "./PostDetail";
 
 export default function Profile({ currentUser, handleLogout }) {
 	// state for the secret message (aka user privilaged data)
 	const bgColor = "#50d71e"
 	const [msg, setMsg] = useState('')
 	const [userPosts, setUserPosts] = useState([])
+	const [modalOpen, setModalOpen] = useState(false)
+    const [viewPostId, setViewPostId] = useState("")
 	// useEffect for getting the user data and checking auth
 	useEffect(() => {
 		const fetchData = async () => {
@@ -44,20 +48,44 @@ export default function Profile({ currentUser, handleLogout }) {
 	const userPost = userPosts.map((post, i) => {
 		return (
 			<>
-				<Link to={`/posts/${post._id}`}>
+				{/* <Link to={`/posts/${post._id}`}> */}
 					<div
 						key={`post-${i}`}
 						className={`md:flex flex-col border m-3 p-6'`}
 					>
-						<img src={post.image.cloud_id} alt={post.dish.dishName}/>
+						<img 
+						onClick={()=>{
+							openModal()
+                            setViewPostId(post._id)
+						}}
+						src={post.image.cloud_id} 
+						alt={post.dish.dishName}/>
 					</div>
-				</Link>
+				{/* </Link> */}
 			</>
 		)
 	}).reverse()
+
+	//MODAL CODE
+	Modal.setAppElement(document.getElementById("profileContainer"))
+	const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
+
+    const openModal = () => setModalOpen(true)
+    const closeModal = () => setModalOpen(false)
+
 	return (
+		<>
 		<div
-		
+		id='profileContainer'
 		>
 			<h1
 				className='text-lg font-bold border m-3 p-6 text-center'
@@ -80,5 +108,17 @@ export default function Profile({ currentUser, handleLogout }) {
 
 
 		</div>
+		<Modal
+                isOpen={modalOpen}
+                style={customStyles}
+                onRequestClose={closeModal}
+            >
+                <PostDetail
+                    currentUser={currentUser}
+                    id={viewPostId}
+                />
+            </Modal>
+		
+		</>
 	)
 }

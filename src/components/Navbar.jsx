@@ -72,7 +72,7 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/feed')}
 						src={feedIcon}
 						alt='feed Icon'
-						className='h-[2rem] place-self-center'
+						className='min-w-[30px] place-self-center'
 					/>
 				</div>
 
@@ -85,7 +85,7 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/profile')}
 						src={profileIcon}
 						alt='feed Icon'
-						className='h-[2.5rem] place-self-center'
+						className='min-w-[40px] place-self-center'
 					/>
 				</div>
 
@@ -97,7 +97,7 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/newpost')}
 						src={plusIcon}
 						alt='feed Icon'
-						className='h-[2rem] place-self-center'
+						className='h-[35px] min-w-[35px] place-self-center'
 					/>
 				</div>
 
@@ -109,7 +109,7 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/account')}
 						src={settingIcon}
 						alt='feed Icon'
-						className='h-[2.2rem] place-self-center'
+						className='h-[35px] min-w-[35px] place-self-center'
 					/>
 				</div>
 
@@ -124,7 +124,7 @@ export default function Navbar({ currentUser,
 						}}
 						src={logoutIcon}
 						alt='feed Icon'
-						className='h-[2.2rem] place-self-center'
+						className='h-[35px] min-w-[35px] place-self-center'
 					/>
 				</div>
 
@@ -149,12 +149,14 @@ export default function Navbar({ currentUser,
 
 	return (
 		<nav
-			className='flex justify-between mt-[0.5rem] mx-[20rem]'
+			className='flex justify-center'
 		>
+			<div
+			className='flex justify-between w-[100%] mt-[0.5rem] mx-[20rem]'>
 			{/* user always sees this section */}
 			<Link 
 			to="/"
-			className='place-self-center ml-[1rem]'
+			className='place-self-center'
 			>
 				<p
 				className='text-[1.5rem] font-mono italic'
@@ -162,6 +164,7 @@ export default function Navbar({ currentUser,
 			</Link>
 
 			{currentUser ? loggedIn : loggedOut}
+			</div>
 		</nav>
 	)
 }

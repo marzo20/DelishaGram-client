@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import axios from 'axios'
 import Modal from 'react-modal';
 import PostDetail from "./PostDetail";
@@ -33,46 +32,47 @@ export default function Feed({ currentUser }) {
     const post = posts.map((post, i) => {
         return (
             <div
-                className=''
+                id="whole-card-container"
+                key={`post_${i}`}
+                className='flex flex-col border my-[1rem] mx-[33rem] shadow-md rounded-lg'
             >
-                {/* <Link to={`/posts/${post._id}`}> */}
-                <div
-                    key={`post_${i}`}
-                    className='flex flex-col border my-[1rem] mx-[33rem] shadow-md rounded-lg'
+                <h2
+                    id="userName-text"
+                    className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
                 >
-                    <h2
-                        className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
-                    >
-                        {post.poster.userName ? post.poster.userName : ''}
-                    </h2>
-                    <p
-                        className="text-start font-['Roboto'] pl-5 pb-2 text-sm font-thin"
-                    >
-                        {post.dish.restaurant.name ? post.dish.restaurant.name : ''}
-                    </p>
-                    <img
-                        onClick={() => {
-                            openModal()
-                            setViewPostId(post._id)
-                        }}
-                        className="w-[40rem] min-w-[40rem]"
-                        src={post.image.cloud_id}
-                        alt={post.dish.dishName}
-                    />
-                    <p
-                        className="text-start font-['Roboto'] pl-3 pt-2 pb-2 text-md font-semibold "
-                    >
-                        {post.dish.dishName ? post.dish.dishName : ''}
-                    </p>
+                    {post.poster.userName ? post.poster.userName : ''}
+                </h2>
 
-                </div>
-                {/* </Link> */}
+                <p
+                    id="restaurantName-text"
+                    className="text-start font-['Roboto'] pl-5 pb-2 text-sm font-thin"
+                >
+                    {post.dish.restaurant.name ? post.dish.restaurant.name : ''}
+                </p>
+
+                <img
+                    id="image"
+                    onClick={() => {
+                        openModal()
+                        setViewPostId(post._id)
+                    }}
+                    className="w-[475px] min-w-[475px] h-[475px]min-h-[475px]"
+                    src={post.image.cloud_id}
+                    alt={post.dish.dishName}
+                />
+
+                <p
+                    id="dishName-text"
+                    className="text-start font-['Roboto'] pl-3 pt-2 pb-2 text-md font-semibold "
+                >
+                    {post.dish.dishName ? post.dish.dishName : ''}
+                </p>
             </div>
         )
     }).reverse()
 
     // MODAL STUFF
-    
+
 
     const customStyles = {
         content: {

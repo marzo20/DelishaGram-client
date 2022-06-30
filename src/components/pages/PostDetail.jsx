@@ -73,90 +73,86 @@ export default function PostDetail({ currentUser, id }) {
     }
     const renderDetail = (
         <div
-            // className='border-slate-100 border rounded-lg grid grid-cols-1 max-w-2xl place-content-center shadow-md'
+            id="whole-card-container"
             className='flex flex-col max-w-[50rem] w-[50rem]'
         >
             <h2
+                id="userName-text"
                 className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
             >
                 {post.poster.userName}
             </h2>
+
             <p
+                id="restaurantName-text"
                 className="text-start font-['Roboto'] pl-5 pb-2 text-sm font-thin"
             >
                 {post.dish.restaurant.name}
             </p>
-            {/* <div 
-                className="m-2 justify-self-center w-md"
-            > */}
-            {/* <div
-            className="w-max"> */}
-            <img
-                
-                src={form.img}
-                alt={post.dish.dishName}
-            />
-            {/* </div> */}
-            {/* </div> */}
 
-            <div 
+           
+            <div
+                id="image-container"
+                className='w-[475px] min-w-[475px]'
+            >
+                <img
+                    id="image"
+                    className="object-fill "
+                    src={form.img}
+                    alt={post.dish.dishName}
+                />
+            </div>
+
+            <div
+                id="dishName-dishRating-container"
                 className="grid grid-cols-2"
             >
-
-                {/* <h2
-                    className="text-lg font-['Roboto'] font-bold"
-                >
-                    {post.dish.dishName}
-                </h2> */}
                 <p
+                    id="dishName-text"
                     className="text-start font-['Roboto'] pl-4 pt-2 pb-2 text-md font-semibold "
                 >
                     {post.dish.dishName}
                 </p>
                 <h2
+                    id="dishRating-text"
                     className="text-md font-['Roboto'] font-semibold text-end pt-2 pb-2 pr-9"
                 >
                     Rating: {post.rating}
                 </h2>
             </div>
+
             <div
+                id="content-container"
                 className="justify-self-start px-3"
             >
-                {/* <h2
-                    className="text-lg font-['Roboto'] font-bold"
-                >
-                    {post.dish.dishName}
-                </h2>
-                <h2
-                    className="text-lg font-['Roboto'] font-bold"
-                >
-                    {post.dish.restaurant.name}
-                </h2> */}
                 <p
+                    id="content-text"
                     className="text-base font-['Roboto'] text-start pb-[1rem] px-3"
                 >
                     {post.content}
                 </p>
 
             </div>
+
             <div
+                id="buttons-container"
                 className="grid pb-2 px-4 grid-cols-2"
             >
                 {post.poster._id === currentUser.id ? <button
+                    id="edit-button"
                     className="rounded-md w-20 bg-blue-600 text-white justify-start font-semibold font-['Roboto']"
                     onClick={() => setShowForm(!showForm)}
                 >
                     Edit
                 </button> : ''}
                 {post.poster._id === currentUser.id ? <button
+                    id="delete-button"
                     className="rounded-md w-20 text-white bg-red-600 justify-self-end font-semibold font-['Roboto']"
                     onClick={() => handleDelete()}
                 >
                     Delete
                 </button> : ''}
             </div>
-
-
         </div>
     )
     return (

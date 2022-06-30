@@ -80,6 +80,8 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openYe
                 <div
                     className={inputDivStyle}
                 >
+                    
+                    <label htmlFor="rating">rating: </label>
                     <div className="flex flex-row">
                         {[...Array(5)].map((star, i) => {
                             const ratingValue = i +1
@@ -104,17 +106,6 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openYe
 
 
                     </div>
-                    {/* <label htmlFor="rating">rating: </label> */}
-                    <input
-                        className={inputStyle}
-                        type="number"
-                        id='rating'
-                        min="1"
-                        max="5"
-                        value={form.rating}
-                        onChange={e => setForm({ ...form, rating: e.target.value })}
-                        required
-                    />
                 </div>
                 <div
                     className={inputDivStyle}

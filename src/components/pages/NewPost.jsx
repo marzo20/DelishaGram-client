@@ -5,9 +5,12 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import FileUploadForm from '../FileUploadForm'
 import Modal from 'react-modal';
 import jwt_decode from "jwt-decode"
+import { FaStar } from 'react-icons/fa'
+
 
 export default function NewPost({ imgUrl, setImgUrl }) {
   let navigate = useNavigate()
+ 
   const [form, setForm] = useState({
     email: "",
     restaurant: '',
@@ -273,6 +276,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
                 >{form.dish}</p>
                 <p
                   className="pr-8">Rating: {form.rating}</p>
+                  
               </div>
               <div>
                 <p

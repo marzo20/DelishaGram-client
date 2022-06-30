@@ -10,6 +10,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
   const [form, setForm] = useState({
     email: "",
     restaurant: '',
+    restaurantId: "",
     location: "",
     dish: '',
     rating: '',
@@ -24,7 +25,6 @@ export default function NewPost({ imgUrl, setImgUrl }) {
     region: {},
     total: 0
   })
-  const [pickedRestId, setPickedRestId] = useState("")
   const [lat, setLat] = useState("")
   const [long, setLong] = useState("")
   const [getLatLong, setGetLatLong] = useState(false)
@@ -110,11 +110,11 @@ export default function NewPost({ imgUrl, setImgUrl }) {
       console.log("form:", form)
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts`, form)
       console.log(response)
-      // console.log(response)
-      // setPosts([...posts, response.data])
 
       setForm({
         restaurant: '',
+        restaurantObj:{},
+        location:"",
         dish: '',
         rating: '',
         content: '',
@@ -146,16 +146,28 @@ export default function NewPost({ imgUrl, setImgUrl }) {
     return (
       <>
         <div
-          className="flex">
+          className="flex my-[10px] border rounded-lg"
+          onClick={()=>{
+            setForm({ ...form, restaurant: business.name, restaurantId: business.id  })
+            setModalOpen(false)
+          }}
+          >
           <div>
             <img
-              className="w-[75px]"
+              className="w-[150px] h-[150px]"
               src={business.image_url} alt={`image of ${business.name}`} />
           </div>
-          <div>
-            <p>{business.name}</p>
-            <p>{business.location.address1}</p>
-            <p>{business.location.city}</p>
+          <div
+          className="flex flex-col justify-center mx-[10px]">
+            <p
+            className="font-bold text-xl"
+            >{business.name}</p>
+            <p
+            className="text-lg"
+            >{business.location.address1}</p>
+            <p
+             className="text-lg"
+            >{business.location.city}</p>
           </div>
         </div>
       </>
@@ -185,7 +197,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
           hasModal={true}
         />
       </div>
-      : ""
+      : "LOADING"
     }
       <Modal
         isOpen={modalOpen}
@@ -193,19 +205,23 @@ export default function NewPost({ imgUrl, setImgUrl }) {
         style={customStyles}
       >
         <div
-          className="h-[30rem] w-[30rem]">
+          className="h-[50rem] w-[50rem]"          >
           <button
+            className="border rounded-lg bg-slate-100 w-[30px] h-[30px]"
             onClick={closeModal}
           >X</button>
           <form
+          className="flex justify-center"
             onSubmit={handleYelpRestAPI}>
             <input
+              type="text"
               className="border"
               placeholder="search"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
             <input
+              type="text"
               placeholder="location"
               className="border"
               list="locations"

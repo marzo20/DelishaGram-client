@@ -74,7 +74,7 @@ export default function PostDetail({ currentUser, id }) {
     const renderDetail = (
         <div
             // className='border-slate-100 border rounded-lg grid grid-cols-1 max-w-2xl place-content-center shadow-md'
-            className='flex flex-col border my-[1rem] mx-[33rem] min-w-[50rem] w-[50rem] shadow-md rounded-lg'
+            className='flex flex-col max-w-[50rem] w-[50rem]'
         >
             <h2
                 className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
@@ -89,11 +89,14 @@ export default function PostDetail({ currentUser, id }) {
             {/* <div 
                 className="m-2 justify-self-center w-md"
             > */}
+            {/* <div
+            className="w-max"> */}
             <img
-                className="w-[50rem] min-w-[50rem]"
+                
                 src={form.img}
                 alt={post.dish.dishName}
             />
+            {/* </div> */}
             {/* </div> */}
 
             <div 

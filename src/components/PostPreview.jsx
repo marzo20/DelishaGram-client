@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Modal from 'react-modal';
 import PostDetail from './pages/PostDetail';
 

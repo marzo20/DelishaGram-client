@@ -30,13 +30,12 @@ export default function PostDetail({ currentUser, id }) {
         content: ''
     })
 
+    // retrieve post data from server and populate form with that data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
                 console.log('consologing', response.data)
-
-                //    const newPost = response.data
                 setPost(response.data)
                 setForm({
                     restaurant: response.data.dish.restaurant.name,
@@ -53,6 +52,7 @@ export default function PostDetail({ currentUser, id }) {
         fetchData()
     }, [])
 
+    // handles submit function for PostForm
     const handleSubmit = async (e, form, setForm) => {
         e.preventDefault()
         try {
@@ -64,6 +64,8 @@ export default function PostDetail({ currentUser, id }) {
             console.log('put method failed :(', err)
         }
     }
+
+    // handles delete function for posts and navigates to profile after
     const handleDelete = () => {
         axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
             .then(response => {

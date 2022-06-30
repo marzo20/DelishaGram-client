@@ -328,7 +328,8 @@ export default function NewPost({ imgUrl, setImgUrl }) {
 
             <button>Search</button>
           </form>
-          {showYelpResults}
+          {console.log(yelpResults.businesses)}
+          {yelpResults.businesses.length > 1 ? showYelpResults: "Please Search for a Restaurant to Select" }
         </div>
       </Modal>
     </>

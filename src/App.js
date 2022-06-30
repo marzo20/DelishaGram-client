@@ -70,7 +70,7 @@ function App() {
 
   return (
     <Router>
-      <header>
+
         <Navbar
           currentUser={currentUser}
           handleLogout={handleLogout}
@@ -78,7 +78,7 @@ function App() {
           // searchDish={searchDish}
           // setSearchDish={setSearchDish}
         />
-      </header>
+
 
       <div className="">
         <Routes>
@@ -111,7 +111,9 @@ function App() {
           />
           <Route
             path="/feed"
-            element={<Feed />}
+            element={<Feed 
+              currentUser={currentUser}
+            />}
           />
           <Route
             path="/searchresults"

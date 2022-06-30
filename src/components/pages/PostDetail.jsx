@@ -74,7 +74,7 @@ export default function PostDetail({ currentUser, id }) {
     const renderDetail = (
         <div
             id="whole-card-container"
-            className='flex flex-col max-w-[50rem] w-[50rem]'
+            className='flex flex-col max-w-[30rem] w-[30rem]'
         >
             <h2
                 id="userName-text"
@@ -93,11 +93,11 @@ export default function PostDetail({ currentUser, id }) {
            
             <div
                 id="image-container"
-                className='w-[475px] min-w-[475px]'
+                className=''
             >
                 <img
                     id="image"
-                    className="object-fill "
+                    className="w-[30rem] min-w-[30rem]"
                     src={form.img}
                     alt={post.dish.dishName}
                 />

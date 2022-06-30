@@ -118,6 +118,7 @@ function App() {
           <Route
             path="/searchresults"
             element={<SearchResults 
+              currentUser={currentUser}
               searchResult={searchResult}
               searchDish={searchDish}
              />}

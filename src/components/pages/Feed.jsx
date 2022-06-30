@@ -85,8 +85,11 @@ export default function Feed({ currentUser }) {
             transform: 'translate(-50%, -50%)',
             padding: 0,
             overflow: 'hidden visible',
+            'max-height': 'calc(100vh - 70px)',
+            'overflow-y': 'auto',
             'max-width': '30rem',
-            'border-radius': '8px'
+            'border-radius': '8px',
+            
         },
     };
 

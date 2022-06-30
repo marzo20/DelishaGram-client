@@ -3,7 +3,8 @@ import { useState, useEffect } from "react"
 import PostPreview from "../PostPreview"
 import axios from "axios"
 
-export default function SearchResults() {
+
+export default function SearchResults( {currentUser }) {
     const [msg, setMsg] = useState("")
     const [getResponse, setGetResponse] = useState(false)
     const [dishResults, setDishResults] = useState({
@@ -57,6 +58,7 @@ export default function SearchResults() {
                     dishName={result.dish.dishName}
                     restaurantName={result.dish.restaurant.name}
                     userName={result.poster.userName}
+                    currentUser={currentUser}
                 />
             </>
         )

@@ -51,16 +51,25 @@ export default function Profile({ currentUser, handleLogout }) {
 				{/* <Link to={`/posts/${post._id}`}> */}
 				<div
 						key={`post-${i}`}
-						className={`w-64 h-64 bg-black-100 relative border m-3 p-6'`}
-					>
-						<div
 						onClick={()=>{
 							openModal()
                             setViewPostId(post._id)
 						}}
+						className={`w-64 h-64 bg-black-100 relative border m-3 p-6'`}
+					>
+						<div
+						// onClick={()=>{
+						// 	openModal()
+                        //     setViewPostId(post._id)
+						// }}
                         className={`absolute inset-0 bg-cover bg-center z-0`}
                         style={{backgroundImage: `url(${post.image.cloud_id})`}} ></div>
-						<div className="opacity-0 bg-black hover:opacity-80 duration-300 absolute inset-0 z-10 flex justify-center items-center text-3xl text-white text-center font-semibold">{post.dish.restaurant.name}</div>
+						<div 
+						// onClick={()=>{
+						// 	openModal()
+                        //     setViewPostId(post._id)
+						// }}
+						className="opacity-0 bg-black hover:opacity-80 duration-300 absolute inset-0 z-1 flex justify-center items-center text-3xl text-white text-center font-semibold">{post.dish.restaurant.name}</div>
 						{/* <img 
 						className={`w-64 h-64 absolute inset-0 bg-cover bg-center z-0`}
 						onClick={()=>{

@@ -115,7 +115,7 @@ export default function Profile({ currentUser, handleLogout }) {
 			{/* {userPost} */}
 			<h2>
 				<div
-					className='grid grid-cols-3 mx-[15rem] justify-items-center'
+					className='grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mx-[15rem] justify-items-center'
 				>
 					{userPosts.length > 0 ? userPost : 'NO POST'}
 				</div>

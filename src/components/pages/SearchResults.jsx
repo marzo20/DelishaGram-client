@@ -69,7 +69,7 @@ export default function SearchResults( {currentUser }) {
             <h1 className="flex justify-center m-4 text-3xl font-bold">Search Results</h1>
             {/* {httpStatus === 200 ? renderResults : msg} */}
             <div
-            className="grid grid-cols-3 mx-[15rem] justify-items-center">
+            className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mx-[15rem] justify-items-center">
                 {getResponse ? renderResults : msg}
             </div>
         </>

@@ -77,7 +77,7 @@ export default function ProfileEdit() {
     }
 
     return (
-        <div className="grid grid-cols-2 gap-10 m-20">
+        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 m-20">
             <div className="border-slate-100 border-2">
                 <h1>User Information</h1>
                 <form onSubmit={handleEditUserSubmit}>

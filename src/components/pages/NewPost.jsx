@@ -178,13 +178,13 @@ export default function NewPost({ imgUrl, setImgUrl }) {
           <div
             className="flex flex-col justify-center mx-[10px]">
             <p
-              className="font-bold text-xl"
+              className="font-bold font-['Roboto'] text-xl"
             >{business.name}</p>
             <p
-              className="text-lg"
+              className="text-lg font-['Roboto']"
             >{business.location.address1}</p>
             <p
-              className="text-lg"
+              className="text-lg font-['Roboto']"
             >{business.location.city}</p>
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
     )
   })
   const loading = <>
-    <div className="flex justify-center m-40">
+    <div className="flex justify-center font-['Roboto'] m-40">
       <button disabled type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center">
         <svg role="status" class="inline w-4 h-4 mr-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB" />
@@ -221,7 +221,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
               {/* Button to Open Image Selector */}
               <div
               onClick={openImageModal}
-                className="flex justify-center items-center border w-[480px] h-[50px] place-self-center align-center bg-slate-100"
+                className="font-['Roboto'] flex justify-center items-center border w-[480px] h-[50px] place-self-center align-center bg-slate-100"
               >
                 Add Image
               </div>
@@ -251,9 +251,9 @@ export default function NewPost({ imgUrl, setImgUrl }) {
                 className="flex flex-col "
               >
                 <p
-                  className="pl-4">{currentUserName}</p>
+                  className="pl-4 font-['Roboto']">{currentUserName}</p>
                 <p
-                  className="pl-5">{form.restaurant}</p>
+                  className="pl-5 font-['Roboto']">{form.restaurant}</p>
               </div>
               <div
                 className="flex justify-center"
@@ -268,7 +268,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
                 className="flex justify-between pt-1"
               >
                 <p
-                  className="pl-4"
+                  className="pl-4 font-['Roboto']"
                 >{form.dish}</p>
                 <p
                   className="flex flex-row pr-8">{[...Array(5)].map((star,i) => {
@@ -284,7 +284,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
               </div>
               <div>
                 <p
-                  className="pl-4">{form.content}</p>
+                  className="pl-4 font-['Roboto']">{form.content}</p>
               </div>
             </div>
           </div>
@@ -318,7 +318,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
         <div
           className="h-[50rem] w-[50rem]"          >
           <button
-            className="border rounded-lg w-[30px] h-[30px]"
+            className="border font-['Roboto'] rounded-lg w-[30px] h-[30px]"
             onClick={closeYelpModal}
           >X</button>
           <form
@@ -326,7 +326,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
             onSubmit={handleYelpRestAPI}>
             <input
               type="text"
-              className="border"
+              className="border font-['Roboto']"
               placeholder="search"
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -334,14 +334,14 @@ export default function NewPost({ imgUrl, setImgUrl }) {
             <input
               type="text"
               placeholder="location"
-              className="border"
+              className="border font-['Roboto']"
               list="locations"
               value={location}
               defaultValue="Current Location"
               onChange={e => setLocation(e.target.value)}
             />
             <datalist id="locations">
-              <option value="Current Location">Current Location</option>
+              <option className="font-['Roboto']"value="Current Location">Current Location</option>
 
             </datalist>
 

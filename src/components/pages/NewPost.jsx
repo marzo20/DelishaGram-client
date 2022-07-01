@@ -217,17 +217,13 @@ export default function NewPost({ imgUrl, setImgUrl }) {
             <div
               className="w-[30rem] place-self-center"
             >
-              <h1>create newPost</h1>
 
               {/* Button to Open Image Selector */}
               <div
-                className="grid grid-cols-2"
+              onClick={openImageModal}
+                className="flex justify-center items-center border w-[480px] h-[50px] place-self-center align-center bg-slate-100"
               >
-                <p>Image: </p>
-                <button
-                  onClick={openImageModal}
-                  className="border w-[100px] h-[20px] place-self-center align-center"
-                >+</button>
+                Add Image
               </div>
 
               {/* Post Form */}

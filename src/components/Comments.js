@@ -9,6 +9,10 @@ export default function Comments({allComments}) {
             <div
             className='flex'>
             <p
+                style={{
+                    cursor: 'pointer',
+                    transition: 'color 200ms'
+                }} 
                 className='font font-bold pl-6'
                 onClick={() => {
                     

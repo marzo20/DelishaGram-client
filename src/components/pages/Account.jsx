@@ -78,59 +78,73 @@ export default function ProfileEdit() {
 
     return (
         <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 m-20">
-            <div className="border-slate-100 border-2">
-                <h1>User Information</h1>
+            <div className="border-slate-100 border-2 w-[40rem]">
+                <h1
+                    className="font-['Roboto']"
+                >User Information</h1>
                 <form onSubmit={handleEditUserSubmit}>
 
                     <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="username">User Name: </label>
+                        <label
+                        className="font-['Roboto']"
+                        htmlFor="username">User Name: </label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto']"
                             id="username"
                             value={userName}
                             onChange={e => { setUserName(e.target.value) }}
                         />
                     </div>
-                    <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="firstName">First Name:</label>
+                    <div className="grid grid-cols-2 m-2 font-['Roboto']">
+                        <label 
+                        className="font-['Roboto']"
+                        htmlFor="firstName">First Name:</label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto']"
                             id="firstName"
                             value={firstName}
                             onChange={e => { setFirstName(e.target.value) }}
                         />
                     </div>
                     <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="lastName">Last Name: </label>
+                        <label 
+                        className="font-['Roboto']"
+                        htmlFor="lastName">Last Name: </label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto']"
                             id="lastName"
                             value={lastName}
                             onChange={e => { setLastName(e.target.value) }}
                         />
                     </div>
                     <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="email">Email: </label>
+                        <label 
+                        className="font-['Roboto']"
+                        htmlFor="email">Email: </label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto']"
                             id="email"
                             value={email}
                             onChange={e => { setEmail(e.target.value) }}
                         />
                     </div>
                     <button 
-                    className="border border-sm w-36 m-2"
+                    className="border border-sm w-36 m-2 font-['Roboto']"
                     type="submit">Update Info</button>
                 </form>
             </div>
-            <div className="border-slate-100 border-2">
-                <h1>Password</h1>
+            <div className="border-slate-100 border-2 w-[30rem] rounded-lg">
+                <h1
+                className="font-['Roboto'] pt-3 pl-3"
+                >Update Password</h1>
                 <form 
                 onSubmit={handleChangePasswordSubmit}>
                     <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="currentPassword">Current Password: </label>
+                        <label 
+                        className="font-['Roboto'] pl-12"
+                        htmlFor="currentPassword">Current Password: </label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="currentPassword"
                             type="password"
                             value={currentPassword}
@@ -138,9 +152,11 @@ export default function ProfileEdit() {
                         />
                     </div>
                     <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="newPassword">New Password: </label>
+                        <label 
+                        className="font-['Roboto']"
+                        htmlFor="newPassword">New Password: </label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="newPassword"
                             type="password"
                             value={newPassword}
@@ -148,9 +164,11 @@ export default function ProfileEdit() {
                         />
                     </div>
                     <div className="grid grid-cols-2 m-2">
-                        <label htmlFor="verifyNewPassword">Verify New Password: </label>
+                        <label 
+                        className="font-['Roboto']"
+                        htmlFor="verifyNewPassword">Verify New Password: </label>
                         <input
-                        className="border border-sm"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="verifyNewPassword"
                             type="password"
                             value={verifyNewPassword}
@@ -158,7 +176,7 @@ export default function ProfileEdit() {
                         />
                     </div>
                     <button 
-                    className="border border-sm m-2 w-36"
+                    className="border border-sm m-2 w-36 font-['Roboto'] rounded-lg"
                     type="submit">Change Password</button>
                 </form>
             </div>

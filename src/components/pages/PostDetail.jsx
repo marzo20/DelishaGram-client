@@ -172,7 +172,7 @@ export default function PostDetail({ currentUser, id, closeModal }) {
             >
                 <p
                     id="dishName-text"
-                    className="text-start font-['Roboto'] pl-4 pt-2 pb-2 text-md font-semibold "
+                    className="text-start font-['Roboto'] pl-4 pt-2 pb-2 mt-1 text-md font-semibold "
                 >
                     {post.dish.dishName}
                 </p>
@@ -196,9 +196,14 @@ export default function PostDetail({ currentUser, id, closeModal }) {
                 id="content-container"
                 className="justify-self-start px-3"
             >
+                <h1
+                    className='font-bold inline'
+                >
+                    {post.poster.userName}
+                </h1>
                 <p
                     id="content-text"
-                    className="text-base font-['Roboto'] text-start pb-[1rem] px-3"
+                    className="text-base font-['Roboto'] text-start pb-[1rem] px-3 inline"
                 >
                     {post.content}
                 </p>
@@ -212,12 +217,12 @@ export default function PostDetail({ currentUser, id, closeModal }) {
                     onSubmit={handleCommentSubmit}
                     className='flex'>
                     <input
-                        className='border'
+                        className='border w-4/5 ml-[1rem] mb-[2rem] rounded-md'
                         value={commentContent}
                         onChange={e => { setCommentContent(e.target.value) }}
                     />
                     <button
-                        className='border'
+                        className='border mb-[2rem] ml-1 bg-black text-white px-2 rounded-md'
                         type='submit'>Post</button>
                 </form>
             </div>
@@ -235,7 +240,7 @@ export default function PostDetail({ currentUser, id, closeModal }) {
                 </button> : ''}
                 {post.poster._id === currentUser.id ? <button
                     id="delete-button"
-                    className="rounded-md w-20 text-white bg-red-600 justify-self-end font-semibold font-['Roboto']"
+                    className="rounded-md w-20 mr-1 text-white bg-red-600 justify-self-end font-semibold font-['Roboto']"
                     onClick={() => handleDelete()}
                 >
                     Delete

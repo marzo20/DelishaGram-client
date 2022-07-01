@@ -34,17 +34,6 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openYe
                 }
                 }>
                 <div>
-                    {hasModal ?
-                        <button
-                            className={`${buttonStyle}`}
-                            type='button'
-                            onClick={openYelpModal}
-                        >
-                            Add a Restaurant
-                        </button>
-                        :
-                        ""
-                    }
                     <div
                         className={inputDivStyle}>
                         <label
@@ -59,6 +48,7 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openYe
                             onChange={e => setForm({ ...form, restaurant: e.target.value })}
                             required
                             readOnly
+                            onClick={hasModal? openYelpModal : ""}
                         />
                     </div>
 
@@ -71,7 +61,7 @@ export default function PostForm({ form, setForm, handleSubmit, hasModal, openYe
                         className={inputStyle}
                         type="text"
                         id='dish'
-                        placeholder='Bone Marrow Pasta'
+                        placeholder="What's your dish called?"
                         value={form.dish}
                         onChange={e => setForm({ ...form, dish: e.target.value })}
                         required

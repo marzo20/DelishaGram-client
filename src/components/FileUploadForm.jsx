@@ -31,7 +31,7 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form, closeI
         <div
         className='flex flex-col h-[35] w-[35] gap-2'
         >
-            <h4>upload a pic!</h4>
+            <h4>Choose File, and click submit, Save and Close to confirm!</h4>
             <div
             className='h-[35]'
             >
@@ -72,7 +72,7 @@ export default function FileUploadForm({imgUrl, setImgUrl, setForm, form, closeI
                 closeImageModal()
                 setForm({ ...form, img: displayImg })
             }}
-            >Close</button>
+            >Save and Close</button>
         </div>
     )
 }

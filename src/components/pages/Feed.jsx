@@ -3,9 +3,11 @@ import axios from 'axios'
 import Modal from 'react-modal';
 import PostDetail from "./PostDetail";
 import { useNavigate } from "react-router-dom";
+import Comments from "../Comments";
 
 export default function Feed({ currentUser }) {
     const navigate = useNavigate()
+    const [pageLoaded, setPageLoaded] = useState(false)
     const [posts, setPosts] = useState([{
         dish: {
             dishName: '',
@@ -14,7 +16,13 @@ export default function Feed({ currentUser }) {
             }
         },
         poster: {},
-        image: {}
+        image: {},
+        comments:[{
+            content:"",
+            commenter:{
+                userName:""
+            }
+        }]
     }]
     )
 
@@ -28,10 +36,12 @@ export default function Feed({ currentUser }) {
                 setPosts(response.data)
             })
             .catch(console.warn)
-    }, [])
+    }, [pageLoaded])
     const msg = "No posts. Please Create new Post"
 
     const post = posts.map((post, i) => {
+        console.log("postComments:",post.comments)
+
         return (
             <div
                 id="whole-card-container"
@@ -60,8 +70,8 @@ export default function Feed({ currentUser }) {
                     onClick={() => {
                         openModal()
                         setViewPostId(post._id)
-                        console.log("post_id",post._id)
-                        console.log("viewPostId",viewPostId)
+                        console.log("post_id", post._id)
+                        console.log("viewPostId", viewPostId)
                     }}
                     className="w-[475px] min-w-[475px] h-[475px]min-h-[475px]"
                     src={post.image.cloud_id}
@@ -74,10 +84,20 @@ export default function Feed({ currentUser }) {
                 >
                     {post.dish.dishName ? post.dish.dishName : ''}
                 </p>
+                {post.comments > 0 ?
+                ""
+                :
+                    <Comments
+                    allComments={post.comments}
+                    />
+                }
+
 
             </div>
         )
     }).reverse()
+
+
 
     // MODAL STUFF
 
@@ -96,17 +116,17 @@ export default function Feed({ currentUser }) {
             'overflow-y': 'scroll',
             'max-width': '30rem',
             'border-radius': '8px',
-             /* scroll bar width */
-             '&::-webkit-scrollbar': { width: '10px' },
-             '&::-webkit-scrollbar-track': { 'box-shadow' : 'inset 0 0 2px #333' },
-             /* scroll bar handle */
-             '&::-webkit-scrollbar-thumb': {
+            /* scroll bar width */
+            '&::-webkit-scrollbar': { width: '10px' },
+            '&::-webkit-scrollbar-track': { 'box-shadow': 'inset 0 0 2px #333' },
+            /* scroll bar handle */
+            '&::-webkit-scrollbar-thumb': {
                 background: 'rgba(51, 51, 51, 0.8)',
                 opacity: 0.6,
                 'border-radius': '10px'
             }
-            
-             //  &::- webkit - scrollbar {
+
+            //  &::- webkit - scrollbar {
             //     "width": "10px"
             // }
 
@@ -116,40 +136,40 @@ export default function Feed({ currentUser }) {
             //     border - radius: 10px;
             // }
 
-           
+
 
             // /* scroll bar handle on hover */
             // &:: -webkit - scrollbar - thumb:hover {
             //     background: rgba(51, 51, 51, 1);
             // }
         },
-        
+
     };
 
-const openModal = () => setModalOpen(true)
-const closeModal = () => setModalOpen(false)
+    const openModal = () => setModalOpen(true)
+    const closeModal = () => setModalOpen(false)
 
-return (
-    <>
-        <div
-            id="feedContainer"
-            className="grid justify-center"
-        >
-            {posts.length > 0 ? post : msg}
+    return (
+        <>
+            <div
+                id="feedContainer"
+                className="grid justify-center"
+            >
+                {posts.length > 0 ? post : msg}
 
-        </div>
-        <Modal
-            isOpen={modalOpen}
-            style={customStyles}
-            onRequestClose={closeModal}
-        >
-            <PostDetail
-                currentUser={currentUser}
-                id={viewPostId}
-                closeModal={closeModal}
-            />
-        </Modal>
-    </>
-)
+            </div>
+            <Modal
+                isOpen={modalOpen}
+                style={customStyles}
+                onRequestClose={closeModal}
+            >
+                <PostDetail
+                    currentUser={currentUser}
+                    id={viewPostId}
+                    closeModal={closeModal}
+                />
+            </Modal>
+        </>
+    )
 }
 

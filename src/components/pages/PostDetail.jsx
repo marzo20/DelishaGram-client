@@ -5,7 +5,7 @@ import PostForm from './PostForm'
 import { FaStar } from 'react-icons/fa'
 
 
-export default function PostDetail({ currentUser, id, closeModal }) {
+export default function PostDetail({ currentUser, id, closeModal, setUpdateComments }) {
     const navigate = useNavigate()
     console.log("id", id)
     // const { id } = useParams()
@@ -100,6 +100,9 @@ export default function PostDetail({ currentUser, id, closeModal }) {
             const commentPromise = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/comments`, reqBody)
             console.log(commentPromise)
             setCommentSubmitted(true)
+            if(setUpdateComments){
+                setUpdateComments(true)
+            }
         } catch (error) {
             console.warn(error)
         }

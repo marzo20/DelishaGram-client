@@ -8,6 +8,7 @@ import Comments from "../Comments";
 export default function Feed({ currentUser }) {
     const navigate = useNavigate()
     const [pageLoaded, setPageLoaded] = useState(false)
+    const [updateComments,setUpdateComments] = useState(false)
     const [posts, setPosts] = useState([{
         dish: {
             dishName: '',
@@ -34,9 +35,10 @@ export default function Feed({ currentUser }) {
             .then(response => {
                 console.log(response)
                 setPosts(response.data)
+                setUpdateComments(false)
             })
             .catch(console.warn)
-    }, [pageLoaded])
+    }, [pageLoaded, updateComments])
     const msg = "No posts. Please Create new Post"
 
     const post = posts.map((post, i) => {
@@ -167,6 +169,7 @@ export default function Feed({ currentUser }) {
                     currentUser={currentUser}
                     id={viewPostId}
                     closeModal={closeModal}
+                    setUpdateComments={setUpdateComments}
                 />
             </Modal>
         </>

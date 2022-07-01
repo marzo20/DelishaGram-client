@@ -112,6 +112,10 @@ export default function PostDetail({ currentUser, id, closeModal }) {
                     className='flex'>
                     <p
                         className='font font-bold pl-6'
+                        style={{
+                            cursor: 'pointer',
+                            transition: 'color 200ms'
+                        }} 
                         onClick={() => {
                             
                             navigate(`/profile/${comment.commenter.userName}`)
@@ -134,6 +138,10 @@ export default function PostDetail({ currentUser, id, closeModal }) {
             <h2
                 id="userName-text"
                 className="text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide"
+                style={{
+                    cursor: 'pointer',
+                    transition: 'color 200ms'
+                }} 
             >
                 {post.poster.userName}
             </h2>

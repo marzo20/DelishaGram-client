@@ -159,7 +159,7 @@ export default function Navbar({ currentUser,
 			className='place-self-center'
 			>
 				<p
-				className='text-[1.5rem] font-mono italic'
+				className="text-[1.5rem] font-['Roboto']  italic"
 				>DelishaGram</p>
 			</Link>
 

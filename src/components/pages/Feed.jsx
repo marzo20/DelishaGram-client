@@ -60,6 +60,8 @@ export default function Feed({ currentUser }) {
                     onClick={() => {
                         openModal()
                         setViewPostId(post._id)
+                        console.log("post_id",post._id)
+                        console.log("viewPostId",viewPostId)
                     }}
                     className="w-[475px] min-w-[475px] h-[475px]min-h-[475px]"
                     src={post.image.cloud_id}
@@ -144,6 +146,7 @@ return (
             <PostDetail
                 currentUser={currentUser}
                 id={viewPostId}
+                closeModal={closeModal}
             />
         </Modal>
     </>

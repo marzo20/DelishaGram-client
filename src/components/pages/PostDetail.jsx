@@ -1,14 +1,20 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostForm from './PostForm'
-import {FaStar} from 'react-icons/fa'
+import { FaStar } from 'react-icons/fa'
 
 
-export default function PostDetail({ currentUser, id }) {
+export default function PostDetail({ currentUser, id, closeModal }) {
     const navigate = useNavigate()
+    console.log("id", id)
     // const { id } = useParams()
     const [showForm, setShowForm] = useState(false)
+    const [commentContent, setCommentContent] = useState("")
+    const [commentSubmitted, setCommentSubmitted] = useState(false)
+    const [commentArr, setCommentArr] = useState([{
+        commenter:{}
+    }])
     const [post, setPost] = useState({
         dish: {
             dishName: '',
@@ -35,7 +41,7 @@ export default function PostDetail({ currentUser, id }) {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
-                console.log('consologing', response.data)
+                // console.log('consologing', response.data)
 
                 //    const newPost = response.data
                 setPost(response.data)
@@ -46,13 +52,18 @@ export default function PostDetail({ currentUser, id }) {
                     content: response.data.content,
                     img: response.data.image.cloud_id
                 })
-                console.log('what is in post', post)
+                // get comments
+                const getComments = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/comments/${response.data._id}`)
+                setCommentArr(getComments.data.comments)
+                setCommentSubmitted(false)
+                setCommentContent("")
+
             } catch (err) {
                 console.log(err)
             }
         }
         fetchData()
-    }, [])
+    }, [id,commentSubmitted])
 
     const handleSubmit = async (e, form, setForm) => {
         e.preventDefault()
@@ -72,6 +83,49 @@ export default function PostDetail({ currentUser, id }) {
             })
             .catch(console.warn)
     }
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault()
+        // console.log("comment!")
+        try {
+            if (commentContent === "") {
+                console.log("nothing to comment")
+                return
+            }
+            const reqBody = {
+                content: commentContent,
+                postId: post._id,
+                userId: currentUser.id
+            }
+            const commentPromise = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/comments`, reqBody)
+            console.log(commentPromise)
+            setCommentSubmitted(true)
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+
+    const rendComments = commentArr.map((comment) => {
+        return (
+            <>
+                <div
+                    className='flex'>
+                    <p
+                        className='font font-bold pl-6'
+                        onClick={() => {
+                            
+                            navigate(`/profile/${comment.commenter.userName}`)
+                            closeModal()
+                        }}
+                    >{comment.commenter.userName}</p>
+                    <p
+                        className='pl-2'
+                    >{comment.content}</p>
+                </div>
+            </>
+        )
+    })
+
     const renderDetail = (
         <div
             id="whole-card-container"
@@ -91,7 +145,7 @@ export default function PostDetail({ currentUser, id }) {
                 {post.dish.restaurant.name}
             </p>
 
-           
+
             <div
                 id="image-container"
                 className=''
@@ -118,15 +172,15 @@ export default function PostDetail({ currentUser, id }) {
                     id="dishRating-text"
                     className="flex flex-row justify-end text-md font-['Roboto'] font-semibold text-end pt-2 pb-2 pr-9"
                 >
-                    {[...Array(5)].map((star,i) => {
-                    return (
-                      <>
-                      <FaStar 
-                      color={i < post.rating ? '#FFBA5A' : '#a9a9a9'}
-                      size={30}/>
-                      </>
-                    )
-                  })}
+                    {[...Array(5)].map((star, i) => {
+                        return (
+                            <>
+                                <FaStar
+                                    color={i < post.rating ? '#FFBA5A' : '#a9a9a9'}
+                                    size={30} />
+                            </>
+                        )
+                    })}
                 </h2>
             </div>
 
@@ -141,6 +195,23 @@ export default function PostDetail({ currentUser, id }) {
                     {post.content}
                 </p>
 
+            </div>
+            <div>
+                {commentArr.length > 0 ? rendComments : ""}
+            </div>
+            <div>
+                <form
+                    onSubmit={handleCommentSubmit}
+                    className='flex'>
+                    <input
+                        className='border'
+                        value={commentContent}
+                        onChange={e => { setCommentContent(e.target.value) }}
+                    />
+                    <button
+                        className='border'
+                        type='submit'>Post</button>
+                </form>
             </div>
 
             <div
@@ -166,6 +237,7 @@ export default function PostDetail({ currentUser, id }) {
     )
     return (
         <>
+
             {showForm ?
                 <PostForm
                     form={form}

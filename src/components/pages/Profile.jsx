@@ -82,7 +82,7 @@ export default function Profile({ currentUser, handleLogout }) {
 					key={`post-${i}`}
 					onClick={() => {
 						openModal()
-						setViewPostId(post.id)
+						setViewPostId(post._id)
 					}}
 					className={`w-64 h-64 bg-black-100 relative border m-3 p-6'`}
 				>
@@ -231,6 +231,7 @@ export default function Profile({ currentUser, handleLogout }) {
 				<PostDetail
 					currentUser={currentUser}
 					id={viewPostId}
+					closeModal={closeModal}
 				/>
 			</Modal>
 		</>

@@ -77,19 +77,19 @@ export default function ProfileEdit() {
     }
 
     return (
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 m-20">
-            <div className="border-slate-100 border-2 w-[40rem]">
+        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 m-20 mt-[15rem] mr-[6rem]">
+            <div className="border-slate-100 border-2 w-[30rem] rounded-lg ml-[7rem] justify-self-end">
                 <h1
-                    className="font-['Roboto']"
-                >User Information</h1>
+                    className="font-['Roboto'] pt-3 pl-3 underline"
+                >Update User Information</h1>
                 <form onSubmit={handleEditUserSubmit}>
 
                     <div className="grid grid-cols-2 m-2">
                         <label
-                        className="font-['Roboto']"
+                        className="font-['Roboto'] pl-12"
                         htmlFor="username">User Name: </label>
                         <input
-                        className="border border-sm font-['Roboto']"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="username"
                             value={userName}
                             onChange={e => { setUserName(e.target.value) }}
@@ -97,10 +97,10 @@ export default function ProfileEdit() {
                     </div>
                     <div className="grid grid-cols-2 m-2 font-['Roboto']">
                         <label 
-                        className="font-['Roboto']"
+                        className="font-['Roboto'] pl-12"
                         htmlFor="firstName">First Name:</label>
                         <input
-                        className="border border-sm font-['Roboto']"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="firstName"
                             value={firstName}
                             onChange={e => { setFirstName(e.target.value) }}
@@ -108,10 +108,10 @@ export default function ProfileEdit() {
                     </div>
                     <div className="grid grid-cols-2 m-2">
                         <label 
-                        className="font-['Roboto']"
+                        className="font-['Roboto'] pl-12"
                         htmlFor="lastName">Last Name: </label>
                         <input
-                        className="border border-sm font-['Roboto']"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="lastName"
                             value={lastName}
                             onChange={e => { setLastName(e.target.value) }}
@@ -119,23 +119,23 @@ export default function ProfileEdit() {
                     </div>
                     <div className="grid grid-cols-2 m-2">
                         <label 
-                        className="font-['Roboto']"
+                        className="font-['Roboto'] pl-12"
                         htmlFor="email">Email: </label>
                         <input
-                        className="border border-sm font-['Roboto']"
+                        className="border border-sm font-['Roboto'] rounded-lg"
                             id="email"
                             value={email}
                             onChange={e => { setEmail(e.target.value) }}
                         />
                     </div>
                     <button 
-                    className="border border-sm w-36 m-2 font-['Roboto']"
+                    className="border border-sm w-36 m-2 font-['Roboto'] rounded-lg bg-black text-white"
                     type="submit">Update Info</button>
                 </form>
             </div>
             <div className="border-slate-100 border-2 w-[30rem] rounded-lg">
                 <h1
-                className="font-['Roboto'] pt-3 pl-3"
+                className="font-['Roboto'] pt-3 pl-3 underline"
                 >Update Password</h1>
                 <form 
                 onSubmit={handleChangePasswordSubmit}>
@@ -153,7 +153,7 @@ export default function ProfileEdit() {
                     </div>
                     <div className="grid grid-cols-2 m-2">
                         <label 
-                        className="font-['Roboto']"
+                        className="font-['Roboto'] pl-12"
                         htmlFor="newPassword">New Password: </label>
                         <input
                         className="border border-sm font-['Roboto'] rounded-lg"
@@ -165,7 +165,7 @@ export default function ProfileEdit() {
                     </div>
                     <div className="grid grid-cols-2 m-2">
                         <label 
-                        className="font-['Roboto']"
+                        className="font-['Roboto'] pl-12"
                         htmlFor="verifyNewPassword">Verify New Password: </label>
                         <input
                         className="border border-sm font-['Roboto'] rounded-lg"
@@ -176,7 +176,7 @@ export default function ProfileEdit() {
                         />
                     </div>
                     <button 
-                    className="border border-sm m-2 w-36 font-['Roboto'] rounded-lg"
+                    className="border border-sm m-2 w-36 font-['Roboto'] bg-black text-white rounded-lg mt-10"
                     type="submit">Change Password</button>
                 </form>
             </div>

@@ -197,6 +197,10 @@ export default function PostDetail({ currentUser, id, closeModal }) {
                 className="justify-self-start px-3"
             >
                 <h1
+                    style={{
+                        cursor: 'pointer',
+                        transition: 'color 200ms'
+                    }} 
                     className='font-bold inline'
                 >
                     {post.poster.userName}

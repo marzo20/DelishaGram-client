@@ -1,51 +1,59 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { Link, useParams } from "react-router-dom"
 import axios from 'axios'
 import Modal from 'react-modal';
 import PostDetail from "./PostDetail";
+import jwt_decode from "jwt-decode"
 
 export default function Profile({ currentUser, handleLogout }) {
 	const { userName } = useParams()
 	// state for the secret message (aka user privilaged data)
 	const bgColor = "#50d71e"
 	const [msg, setMsg] = useState('')
+	const [currentUserId, setCurrentUserId] = useState("")
 	const [userPosts, setUserPosts] = useState([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [viewPostId, setViewPostId] = useState("")
 	const [followers, setFollowers] = useState([])
 	const [following, setFollowing] = useState([])
-	const [currentProfileUserId, setCurrentProfileUserId] = useState({})
+	const [currentProfileUserId, setCurrentProfileUserId] = useState("")
 	const [isFollowing, setIsFollowing] = useState(null)
 	const [pageLoaded, setPageLoaded] = useState(false)
-	// console.log("outside useEffect currentUser:",currentUser)
+
 	// useEffect for getting the user data and checking auth
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const fetchData = async () => {
-			try {
+			try {			
+				const token = localStorage.getItem('jwt')
+				const decoded = jwt_decode(token)
+				console.log("decoded:",decoded.id)
+				setCurrentUserId(decoded.id)
+
 				const userResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/profile/${userName}`)
-				console.log('this is user data', userResponse.data)
+				// console.log('this is user data', userResponse.data)
 				setUserPosts(userResponse.data.posts)
 				// get the token from local storage
-				const token = localStorage.getItem('jwt')
+				// console.log("currentUser:",currentUser)
 				// make the auth headers
-				const options = {
-					headers: {
-						'Authorization': token
-					}
-				}
+				// const options = {
+				// 	headers: {
+				// 		'Authorization': token
+				// 	}
+				// }
 				// console.log("current user:",currentUser.id)
 				setCurrentProfileUserId(userResponse.data.id)
 				
 				// console.log(isFollowing)
 				setFollowers(userResponse.data.followers)
 				setFollowing(userResponse.data.following)
-				console.log("currentUser:",currentUser.id.toString())
+				// console.log("currentUser:",currentUserId)
 				// console.log(followers)
-				const followStatus = followers.includes(currentUser.id.toString())
+				const followStatus = followers.includes(currentUserId)
 				console.log("followStatus",followStatus)
 				setIsFollowing(followStatus)
-				console.log("isFollowing",isFollowing)
 				setPageLoaded(true)
+				// console.log("isFollowing",isFollowing)
+				
 				// hit the auth locked endpoint
 				// const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/auth-locked`, options)
 				// example POST with auth headers (options are always last argument)
@@ -64,12 +72,8 @@ export default function Profile({ currentUser, handleLogout }) {
 			}
 		}
 		fetchData()
-	}, [userName, currentUser])
+	}, [userName,isFollowing])
 
-	// useEffect(()=>{
-	// 	console.log(followers)
-	// 	setIsFollowing(()=>followers.includes(currentUser)?true:false)
-	// },[])
 	const userPost = userPosts.map((post, i) => {
 		return (
 			<>
@@ -78,7 +82,7 @@ export default function Profile({ currentUser, handleLogout }) {
 					key={`post-${i}`}
 					onClick={() => {
 						openModal()
-						setViewPostId(post._id)
+						setViewPostId(post.id)
 					}}
 					className={`w-64 h-64 bg-black-100 relative border m-3 p-6'`}
 				>
@@ -130,26 +134,27 @@ export default function Profile({ currentUser, handleLogout }) {
 			
 			console.log("follow")
 			const reqBody ={
-				currentUserId: currentUser.id,
-				userToFollowId:currentProfileUserId,
+				currentUserId: currentUserId,
+				userToFollowId: currentProfileUserId,
 			}
-			console.log(reqBody)
+			// console.log(reqBody)
 			const followPromise = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/follow`,reqBody)
 			setIsFollowing(true)
 		} catch (error) {
 			console.warn(error)
 		}
-
 	}
 
 	const handleUnfollow = async () => {
-		console.log("unfollow")
 		try {
+			console.log("unfollow")
 			const reqBody ={
-				currentUserId: currentUser.id,
-				userToFollowId:currentProfileUserId,
+				currentUserId: currentUserId,
+				userToUnfollowId: currentProfileUserId.toString()
 			}
-			const followPromise = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/follow`,reqBody)
+			console.log(reqBody)
+			const unfollowPromise = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/unfollow`,reqBody)
+			console.log(unfollowPromise)
 			setIsFollowing(false)
 		} catch (error) {
 			console.warn(error)
@@ -191,7 +196,7 @@ export default function Profile({ currentUser, handleLogout }) {
 						<p>following</p>
 					</div>
 
-					{currentUser.id === currentProfileUserId && pageLoaded === false ?
+					{currentUserId === currentProfileUserId ?
 						""
 						:
 						<button

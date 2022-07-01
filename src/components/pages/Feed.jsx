@@ -5,7 +5,7 @@ import PostDetail from "./PostDetail";
 import { useNavigate } from "react-router-dom";
 
 export default function Feed({ currentUser }) {
-    const navigate =useNavigate()
+    const navigate = useNavigate()
     const [posts, setPosts] = useState([{
         dish: {
             dishName: '',
@@ -43,7 +43,7 @@ export default function Feed({ currentUser }) {
                     className="
                     text-start font-['Roboto'] pl-4 pt-1 font-black text-lg tracking-wide no-underline
                     hover:underline"
-                    onClick={()=>{navigate(`/profile/${post.poster.userName}`)}}
+                    onClick={() => { navigate(`/profile/${post.poster.userName}`) }}
                 >
                     {post.poster.userName ? post.poster.userName : ''}
                 </h2>
@@ -90,37 +90,63 @@ export default function Feed({ currentUser }) {
             transform: 'translate(-50%, -50%)',
             padding: 0,
             overflow: 'hidden visible',
-            'max-height': 'calc(100vh - 70px)',
-            'overflow-y': 'auto',
+            'max-height': 'calc(100vh - 60px)',
+            'overflow-y': 'scroll',
             'max-width': '30rem',
             'border-radius': '8px',
+             /* scroll bar width */
+             '&::-webkit-scrollbar': { width: '10px' },
+             '&::-webkit-scrollbar-track': { 'box-shadow' : 'inset 0 0 2px #333' },
+             /* scroll bar handle */
+             '&::-webkit-scrollbar-thumb': {
+                background: 'rgba(51, 51, 51, 0.8)',
+                opacity: 0.6,
+                'border-radius': '10px'
+            }
             
+             //  &::- webkit - scrollbar {
+            //     "width": "10px"
+            // }
+
+            // /* scroll bar track */
+            // &:: -webkit - scrollbar - track {
+            //     box - shadow: inset 0 0 2px #333;
+            //     border - radius: 10px;
+            // }
+
+           
+
+            // /* scroll bar handle on hover */
+            // &:: -webkit - scrollbar - thumb:hover {
+            //     background: rgba(51, 51, 51, 1);
+            // }
         },
+        
     };
 
-    const openModal = () => setModalOpen(true)
-    const closeModal = () => setModalOpen(false)
+const openModal = () => setModalOpen(true)
+const closeModal = () => setModalOpen(false)
 
-    return (
-        <>
-            <div
-                id="feedContainer"
-                className="grid justify-center"
-            >
-                {posts.length > 0 ? post : msg}
+return (
+    <>
+        <div
+            id="feedContainer"
+            className="grid justify-center"
+        >
+            {posts.length > 0 ? post : msg}
 
-            </div>
-            <Modal
-                isOpen={modalOpen}
-                style={customStyles}
-                onRequestClose={closeModal}
-            >
-                <PostDetail
-                    currentUser={currentUser}
-                    id={viewPostId}
-                />
-            </Modal>
-        </>
-    )
+        </div>
+        <Modal
+            isOpen={modalOpen}
+            style={customStyles}
+            onRequestClose={closeModal}
+        >
+            <PostDetail
+                currentUser={currentUser}
+                id={viewPostId}
+            />
+        </Modal>
+    </>
+)
 }
 

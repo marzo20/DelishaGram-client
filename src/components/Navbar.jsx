@@ -25,6 +25,7 @@ export default function Navbar({ currentUser,
 				searchDish
 			}
 		})
+		setSearchDish('')
 	}
 
 	const loggedIn = (
@@ -36,7 +37,7 @@ export default function Navbar({ currentUser,
 				{/* Search Bar */}
 				<form 
 				onSubmit={handleSearchSubmit}
-				className="flex"
+				className="flex group"
 				>
 					<label htmlFor="search"></label>
 					<input
@@ -54,7 +55,7 @@ export default function Navbar({ currentUser,
 						<img
 							src={magGlassIcon}
 							alt='feed Icon'
-							className='h-[1.2rem] flex item-center'
+							className='h-[1.2rem] flex item-center group-hover:scale-125'
 						/>
 					</button>
 				</form>
@@ -66,7 +67,7 @@ export default function Navbar({ currentUser,
 			>
 				{/* feed Nav Icon */}
 				<div
-					className='flex mx-[0.5rem]'
+					className='flex mx-[0.5rem] group'
 				>
 					<img
 						style={{
@@ -76,13 +77,13 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/feed')}
 						src={feedIcon}
 						alt='feed Icon'
-						className='min-w-[30px] place-self-center'
+						className='min-w-[30px] place-self-center group-hover:scale-125'
 					/>
 				</div>
 
 				{/* profile Nav Icon */}
 				<div
-					className='flex mx-[0.5rem]'
+					className='flex mx-[0.5rem] group'
 				>
 
 					<img
@@ -93,13 +94,13 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate(`/profile/${currentUser.userName}`)}
 						src={profileIcon}
 						alt='feed Icon'
-						className='min-w-[40px] place-self-center'
+						className='min-w-[40px] place-self-center group-hover:scale-125'
 					/>
 				</div>
 
 				{/* new post Nav Icon */}
 				<div
-					className='flex mx-[0.5rem]'
+					className='flex mx-[0.5rem] group'
 				>
 					<img
 						style={{
@@ -109,13 +110,13 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/newpost')}
 						src={plusIcon}
 						alt='feed Icon'
-						className='h-[35px] min-w-[35px] place-self-center'
+						className='h-[35px] min-w-[35px] place-self-center group-hover:scale-125'
 					/>
 				</div>
 
 				{/* Account/Edit Nav Icon */}
 				<div
-					className='flex mx-[0.5rem]'
+					className='flex mx-[0.5rem] group'
 				>
 					<img
 						style={{
@@ -125,13 +126,13 @@ export default function Navbar({ currentUser,
 						onClick={() => navigate('/account')}
 						src={settingIcon}
 						alt='feed Icon'
-						className='h-[35px] min-w-[35px] place-self-center'
+						className='h-[35px] min-w-[35px] place-self-center group-hover:scale-125'
 					/>
 				</div>
 
 				{/* Log Out Nav Icon */}
 				<div
-					className='flex mx-[0.5rem]'
+					className='flex mx-[0.5rem] group'
 				>
 					<img
 						style={{
@@ -144,7 +145,7 @@ export default function Navbar({ currentUser,
 						}}
 						src={logoutIcon}
 						alt='feed Icon'
-						className='h-[35px] min-w-[35px] place-self-center'
+						className='h-[35px] min-w-[35px] place-self-center group-hover:scale-125'
 					/>
 				</div>
 

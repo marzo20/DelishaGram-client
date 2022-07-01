@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostForm from './PostForm'
+import {FaStar} from 'react-icons/fa'
 
 
 export default function PostDetail({ currentUser, id }) {
@@ -30,12 +31,13 @@ export default function PostDetail({ currentUser, id }) {
         content: ''
     })
 
-    // retrieve post data from server and populate form with that data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
                 console.log('consologing', response.data)
+
+                //    const newPost = response.data
                 setPost(response.data)
                 setForm({
                     restaurant: response.data.dish.restaurant.name,
@@ -52,7 +54,6 @@ export default function PostDetail({ currentUser, id }) {
         fetchData()
     }, [])
 
-    // handles submit function for PostForm
     const handleSubmit = async (e, form, setForm) => {
         e.preventDefault()
         try {
@@ -64,8 +65,6 @@ export default function PostDetail({ currentUser, id }) {
             console.log('put method failed :(', err)
         }
     }
-
-    // handles delete function for posts and navigates to profile after
     const handleDelete = () => {
         axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/posts/${id}`)
             .then(response => {
@@ -117,9 +116,17 @@ export default function PostDetail({ currentUser, id }) {
                 </p>
                 <h2
                     id="dishRating-text"
-                    className="text-md font-['Roboto'] font-semibold text-end pt-2 pb-2 pr-9"
+                    className="flex flex-row justify-end text-md font-['Roboto'] font-semibold text-end pt-2 pb-2 pr-9"
                 >
-                    Rating: {post.rating}
+                    {[...Array(5)].map((star,i) => {
+                    return (
+                      <>
+                      <FaStar 
+                      color={i < post.rating ? '#FFBA5A' : '#a9a9a9'}
+                      size={30}/>
+                      </>
+                    )
+                  })}
                 </h2>
             </div>
 

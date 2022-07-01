@@ -275,8 +275,16 @@ export default function NewPost({ imgUrl, setImgUrl }) {
                   className="pl-4"
                 >{form.dish}</p>
                 <p
-                  className="pr-8">Rating: {form.rating}</p>
-                  
+                  className="flex flex-row pr-8">{[...Array(5)].map((star,i) => {
+                    return (
+                      <>
+                      <FaStar 
+                      color={i < form.rating ? '#FFBA5A' : '#a9a9a9'}
+                      size={30}/>
+                      </>
+                    )
+                  })}</p>
+                 
               </div>
               <div>
                 <p

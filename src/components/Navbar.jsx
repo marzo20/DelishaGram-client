@@ -69,6 +69,10 @@ export default function Navbar({ currentUser,
 					className='flex mx-[0.5rem]'
 				>
 					<img
+						style={{
+							cursor: 'pointer',
+							transition: 'color 200ms'
+						}} 
 						onClick={() => navigate('/feed')}
 						src={feedIcon}
 						alt='feed Icon'
@@ -82,6 +86,10 @@ export default function Navbar({ currentUser,
 				>
 
 					<img
+						style={{
+							cursor: 'pointer',
+							transition: 'color 200ms'
+						}} 
 						onClick={() => navigate(`/profile/${currentUser.userName}`)}
 						src={profileIcon}
 						alt='feed Icon'
@@ -94,6 +102,10 @@ export default function Navbar({ currentUser,
 					className='flex mx-[0.5rem]'
 				>
 					<img
+						style={{
+							cursor: 'pointer',
+							transition: 'color 200ms'
+						}} 
 						onClick={() => navigate('/newpost')}
 						src={plusIcon}
 						alt='feed Icon'
@@ -106,6 +118,10 @@ export default function Navbar({ currentUser,
 					className='flex mx-[0.5rem]'
 				>
 					<img
+						style={{
+							cursor: 'pointer',
+							transition: 'color 200ms'
+						}} 
 						onClick={() => navigate('/account')}
 						src={settingIcon}
 						alt='feed Icon'
@@ -118,6 +134,10 @@ export default function Navbar({ currentUser,
 					className='flex mx-[0.5rem]'
 				>
 					<img
+						style={{
+							cursor: 'pointer',
+							transition: 'color 200ms'
+						}} 
 						onClick={() => {
 							handleLogout()
 							navigate('/')

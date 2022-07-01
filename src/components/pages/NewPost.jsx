@@ -265,7 +265,7 @@ export default function NewPost({ imgUrl, setImgUrl }) {
                 <img
                   className="w-[25rem] min-w-[25rem]"
                   src={form.img}
-                  alt={`image of ${form.dish}`}
+                  // alt={`image of ${form.dish}`}
                 />
               </div>
               <div
